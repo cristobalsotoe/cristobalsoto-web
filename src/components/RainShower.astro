@@ -1,0 +1,49 @@
+---
+// src/components/RainShower.astro
+// Generamos 50 gotas de lluvia
+const raindrops = Array.from({ length: 50 });
+---
+
+<div id="rain-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+  {raindrops.map(() => {
+    // Generamos valores aleatorios para cada gota en el servidor
+    const left = Math.floor(Math.random() * 100);
+    const delay = Math.random() * 2; // Retraso entre 0 y 2 segundos
+    const duration = 0.7 + Math.random() * 0.8; // Duración de caída entre 0.7s y 1.5s
+    const opacity = 0.3 + Math.random() * 0.5; // Opacidad entre 0.3 y 0.8
+    const height = Math.floor(Math.random() * 20 + 15); // Altura de la gota entre 15px y 35px
+    
+    return (
+      <div
+        class="absolute top-0 w-[1px] bg-gradient-to-b from-transparent via-blue-400/60 to-blue-200 dark:via-blue-500/60 dark:to-blue-300 raindrop"
+        style={`
+          left: ${left}%;
+          animation-delay: ${delay}s;
+          animation-duration: ${duration}s;
+          opacity: ${opacity};
+          height: ${height}px;
+        `}
+      />
+    );
+  })}
+</div>
+
+<style>
+  .raindrop {
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    /* Comienza un poco más arriba del borde superior para que no aparezcan de golpe */
+    transform: translateY(-100px); 
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100px);
+    }
+    100% {
+      /* Cae hasta el fondo de la pantalla */
+      transform: translateY(100vh);
+    }
+  }
+</style>

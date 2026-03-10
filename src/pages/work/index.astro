@@ -1,59 +1,51 @@
 ---
-import { getCollection } from "astro:content"
+import { getEntry } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import { WORK } from "@consts"
 
-const collection = await getCollection("work")
-
-collection.sort((a, b) => new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime())
-
-const work = await Promise.all(
-  collection.map(async (item) => {
-    const { Content } = await item.render()
-    return { ...item, Content }
-  })
-)
-
-function formatWorkDate(input: Date | string) {
-  if (typeof input === "string") return input
-
-  const month = input.toLocaleDateString("en-US", {
-    month: "short",
-  })
-
-  const year = new Date(input).getFullYear()
-  return `${month} ${year}`
-}
+// Obtenemos específicamente tu archivo cv.md de la colección "work"
+const cvEntry = await getEntry("work", "cv")
+const { Content, headings } = await cvEntry.render()
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <TopLayout>
     <div class="animate page-heading">
-      {WORK.TITLE}
     </div>
   </TopLayout>
-  <BottomLayout>
-    <ul>
-      { 
-        work.map((entry) => (
-          <li class="animate border-b border-black/10 dark:border-white/25 mt-4 py-8 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none">
-            <div class="text-sm uppercase mb-4">
-              {formatWorkDate(entry.data.dateStart)} - {formatWorkDate(entry.data.dateEnd)}
-            </div>
-            <div class="text-black dark:text-white font-semibold">
-              {entry.data.company}
-            </div>
-            <div class="text-sm font-semibold">
-              {entry.data.role}
-            </div>
-            <article class="prose dark:prose-invert">
-              <entry.Content />
-            </article>
-          </li>
-        ))
-      }
-    </ul>
+  
+ <BottomLayout>
+    <div class="relative mt-4 animate">
+      
+      <aside class="hidden lg:block absolute right-full top-0 w-56 pr-8 h-full z-10">
+        <div class="sticky top-24">
+          <p class="font-semibold text-black dark:text-white mb-4 uppercase tracking-wider text-sm">
+            Índice
+          </p>
+          <ul class="space-y-3 border-l border-black/10 dark:border-white/10 pl-4 text-left">
+            {headings
+              .filter((heading) => heading.depth === 2)
+              .map((heading) => (
+                <li>
+                  <a 
+                    href={`#${heading.slug}`} 
+                    class="text-sm text-black/70 dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block"
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+
+      <article class="prose dark:prose-invert max-w-none w-full">
+        <Content />
+      </article>
+
+    </div>
   </BottomLayout>
 </PageLayout>

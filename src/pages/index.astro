@@ -4,8 +4,7 @@ import PageLayout from "@layouts/PageLayout.astro"
 import ArrowCard from "@components/ArrowCard"
 import StackCard from "@components/StackCard.astro"
 import { SITE, SOCIALS } from "@consts"
-import TwinklingStars from "@components/TwinklingStars.astro"
-import MeteorShower from "@components/MeteorShower.astro"
+import RainShower from "@components/RainShower.astro"
 
 const posts = (await getCollection("blog"))
   .filter(post => !post.data.draft)
@@ -43,52 +42,50 @@ const stack = [
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
 
-  <!-- Light Mode: Particles -->
-  <div class='absolute inset-0 block dark:hidden'>
-    <div id='particles1' class='fixed inset-0'></div>
-    <div id='particles2' class='fixed inset-0'></div>
-    <div id='particles3' class='fixed inset-0'></div>
-  </div>
 
-  <!-- Dark Theme: Stars -->
-  <div class='absolute inset-0 bg-black hidden dark:block'>
-    <div id='stars1' class='fixed inset-0'></div>
-    <div id='stars2' class='fixed inset-0'></div>
-    <div id='stars3' class='fixed inset-0'></div>
-  </div>
 
   <!-- Dark Theme: Twinkling Stars / Metors -->
-  <div id="galaxy" class="fixed inset-0">
+<div id="climate-bg" class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-sky-950 to-black bg-[length:400%_400%] animate-clouds opacity-80"></div>
+    
     <div class="hidden dark:block">
-      <TwinklingStars/>
-      <MeteorShower/>
+      <RainShower />
     </div>
   </div>
 
-  <script is:inline src="/js/bg.js"></script>
+<div class="fixed bottom-0 left-0 w-full overflow-hidden leading-[0] pointer-events-none z-0 opacity-50">
+    <svg class="block w-[200%] h-[200px] md:h-[300px] animate-wave-single" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 120" preserveAspectRatio="none">
+      <path d="M0,60 C300,120 900,0 1200,60 C1500,120 2100,0 2400,60 V120 H0 Z" class="fill-blue-1000 dark:fill-blue-1100"></path>
+    </svg>
+  </div>
+
   
   <!-- HERO -->
-  <section class="relative h-screen w-full">
-    <div id="planetcont" class='animate absolute inset-0 top-1/4 overflow-hidden'>
-      <div id="crescent" class='absolute top-0 left-1/2 -translate-x-1/2 w-[250vw] min-h-[100vh] aspect-square rounded-full p-[1px] bg-gradient-to-b from-black/25 dark:from-white/75 from-0% to-transparent to-5%'>
-        <div id="planet" class='w-full h-full bg-white dark:bg-black rounded-full p-[1px] overflow-hidden flex justify-center'>
-          <div id="blur" class='w-full h-20 rounded-full bg-neutral-900/25 dark:bg-white/25 blur-3xl'/>
-        </div>
-      </div>
-    </div>
+<section class="relative h-screen w-full">
     <div class="animate absolute h-full w-full flex items-center justify-center">
-      <div class='relative w-full h-full flex items-center justify-center'>
-        <div class='p-5 text-center'>
+      
+      <div class='relative w-full max-w-5xl px-5 flex flex-col md:flex-row items-center justify-center md:justify-start gap-8 md:gap-12'>
+        
+        <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 animated">
+          <img 
+            src="/img/foto de perfil.jpeg" 
+            alt="Cristóbal Soto-Escobar" 
+            class="w-full h-full object-cover rounded-full shadow-2xl border-4 border-black/10 dark:border-white/10"
+          />
+        </div>
+
+        <div class='text-center md:text-left flex-1'>
           <p class='animated text-lg md:text-xl lg:text-2xl font-semibold opacity-75'>
-            Hello, I am ...
+            Hello, I am
           </p>
-          <p class='animated text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-black dark:text-white'>
-            Astro Sphere
+          <p class='animated text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-black dark:text-white mt-1'>
+            Cristóbal Soto-Escobar
           </p>
-          <p class='animated text-sm md:text-base lg:text-lg opacity-75'>
-            Currently designing products for humans.
+          <p class='animated text-sm md:text-base lg:text-lg opacity-75 mt-2'>
+            Civil Engineer specialized in Water Resources
           </p>
-          <div id="ctaButtons" class='animated flex flex-wrap gap-4 justify-center mt-5'>
+          
+          <div id="ctaButtons" class='animated flex flex-wrap gap-4 justify-center md:justify-start mt-6'>
             <a href='/blog' class='py-2 px-4 rounded truncate text-xs md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend'>
               Read my blog
             </a>
@@ -97,7 +94,9 @@ const stack = [
             </a>
           </div>
         </div>
+
       </div>
+      
     </div>
   </section>
 
@@ -106,14 +105,14 @@ const stack = [
 
       <!-- About Section -->
       <section class="animate">
-        <article>
-          <p>I am a <b><i>software engineer</i></b>, <b><i>ui/ux designer</i></b>, <b><i>product planner</i></b>, <b><i>mentor</i></b>, <b><i>student</i></b>, <b><i>minimalist</i></b>, <b><i>eternal optimist</i></b>, <b><i>crypto enthusiast</i></b> and <b><i>sarcasm connoisseur</i></b>.</p>
-          <p>I love to both build and break things. I am motivated by challenging projects with self-guided research and dynamic problem solving. My true passion is crafting creative front end designs with unique takes on color, typography and motion.</p>
-          <p>During my career</p>
-          <p>I have built products ranging from marketing and ecommerce websites to complex enterprise apps with focus on delivering fast, elegant code along with delightful user interfaces.</p>
-          <p>Now</p>
-          <p>I currently work as a software engineer at StreamlineFS, where I do product planning, design and development.</p>
-        </article>
+    <article>
+  <p>I am a <b>Civil Engineer</b>, <b>water resources specialist</b>, <b>researcher</b>, <b>data analyst</b>, and <b>climate enthusiast</b>.</p>
+  <p>I have a strong interest in hydrology and climate. My work focuses on the analysis of extreme precipitation events in the context of a changing climate, the application of gridded datasets in hydrological studies, and the integrated modeling of surface and groundwater systems using coupled hydrological models.</p>
+  <p><b>During my career</b></p>
+  <p>I have contributed to projects ranging from Strategic Water Resource Management Plans with the Chilean Water Directorate to the development of interactive web platforms and high resolution spatial Intensity, Duration, and Frequency curves.</p>
+  <p><b>Now</b></p>
+  <p>I currently work as a Consulting Engineer at ICASS Spa, where I lead integrated modeling efforts, and I am preparing for my doctoral studie starting in Fall, 2026.</p>
+</article>
       </section>
 
       <!-- Blog Preview Section -->
@@ -133,55 +132,6 @@ const stack = [
             {posts.map((post) => (
               <li>
                 <ArrowCard entry={post} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <!-- Tech Stack Section -->
-      <section class="animate">
-        <div class="space-y-4">
-          <p class="font-semibold text-black dark:text-white">
-            Website build with
-          </p>
-          <div class="flex flex-wrap items-center gap-2 mt-5">
-            {stack.map(item => (
-              <StackCard 
-                text={item.text}
-                icon={item.icon}
-                href={item.href}
-              />
-            ))}
-          </div>
-          <div>
-            Performing reactivity and statefulness, special guest
-            <a href="https://www.solidjs.com/" target="_blank" class="w-fit group underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                SolidJS
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Project Preview Section -->
-      <section class="animate">
-        <div class="space-y-4">
-          <div class="flex justify-between">
-            <p class="font-semibold text-black dark:text-white">
-              Recent projects
-            </p>
-            <a href="/projects" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                All projects
-              </span>
-            </a>
-          </div>
-          <ul class="space-y-4">
-            {projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
               </li>
             ))}
           </ul>

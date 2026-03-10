@@ -184,3 +184,21 @@ article img {
   opacity: 0;
   transform: translateY(10px);
 } */
+
+@keyframes moveClouds {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 50% 0%; }
+}
+.animate-clouds {
+  animation: moveClouds 9s ease infinite;
+}
+
+@keyframes waveSingle {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-wave-single {
+  /* Puedes cambiar los 15s a menos segundos si quieres que la ola vaya más rápido */
+  animation: waveSingle 15s linear infinite; 
+}
