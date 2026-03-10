@@ -6,8 +6,7 @@ import solidJs from "@astrojs/solid-js"
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://cristobalsotoescobar.github.io',
-  base: '/cristobalsoto-web',
+  site: 'https://www.cristobalsoto.cl',
   integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
 })
 
