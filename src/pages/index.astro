@@ -43,22 +43,25 @@ const stack = [
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
 
 
-
-  <!-- Dark Theme: Twinkling Stars / Metors -->
 <div id="climate-bg" class="fixed inset-0 pointer-events-none z-0">
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-sky-950 to-black bg-[length:400%_400%] animate-clouds opacity-80"></div>
-    
-    <div class="hidden dark:block">
-      <RainShower />
+<div class="absolute inset-0 bg-gradient-to-br from-slate-200 via-slate-200 to-slate-200 dark:from-slate-900 dark:via-sky-950 dark:to-black bg-[length:400%_400%] animate-clouds opacity-80"></div>    
+
+<div class="block dark:hidden absolute inset-0 overflow-hidden pointer-events-none">
+      
+      <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-yellow-100/70 rounded-full blur-[100px]"></div>
+      
+    </div>
+
+<div class="hidden dark:block">
+       <RainShower />
     </div>
   </div>
 
 <div class="fixed bottom-0 left-0 w-full overflow-hidden leading-[0] pointer-events-none z-0 opacity-50">
     <svg class="block w-[200%] h-[200px] md:h-[300px] animate-wave-single" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 120" preserveAspectRatio="none">
-      <path d="M0,60 C300,120 900,0 1200,60 C1500,120 2100,0 2400,60 V120 H0 Z" class="fill-blue-1000 dark:fill-blue-1100"></path>
+      <path d="M0,60 C300,120 900,0 1200,60 C1500,120 2100,0 2400,60 V120 H0 Z" class="fill-lime-500 dark:fill-sky-600"></path>
     </svg>
   </div>
-
   
   <!-- HERO -->
 <section class="relative h-screen w-full">
@@ -92,6 +95,29 @@ const stack = [
             <a href='/work' class='py-2 px-4 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend'>
               View my work
             </a>
+          </div>
+
+          <div id="ctaButtons" class='animated flex flex-wrap gap-4 justify-center md:justify-start mt-6'>
+             </div>
+
+          <div class="animated flex flex-wrap gap-5 justify-center md:justify-start mt-6 text-black/60 dark:text-white/60">
+            
+            <a href="mailto:cristobal.soto.9@gmail.com" class="hover:text-blue-500 hover:scale-110 transition-all duration-300" title="Enviar Email">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+            
+            <a href="https://orcid.org/0009-0005-3867-6991" target="_blank" class="hover:text-[#A6CE39] hover:scale-110 transition-all duration-300" title="Perfil ORCID">
+              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+            </a>
+            
+            <a href="https://www.linkedin.com/in/csoto24/" target="_blank" class="hover:text-[#0A66C2] hover:scale-110 transition-all duration-300" title="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            
+            <a href="https://github.com/cristobalsotoescobar" target="_blank" class="hover:text-black dark:hover:text-white hover:scale-110 transition-all duration-300" title="GitHub">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.5-1.4 6.5-7a4.6 4.6 0 0 0-1.39-3.23 4.2 4.2 0 0 0-.1-3.2s-1.1-.35-3.5 1.25a11.39 11.39 0 0 0-7 0C6.2 1.6 5.1 2 5.1 2a4.2 4.2 0 0 0-.1 3.23A4.6 4.6 0 0 0 3.6 8.5c0 5.6 3.35 6.6 6.5 7a4.8 4.8 0 0 0-1 3.02V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
+            </a>
+            
           </div>
         </div>
 
