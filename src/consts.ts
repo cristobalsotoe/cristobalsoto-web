@@ -3,14 +3,20 @@ import type { Site, Page, Links, Socials } from "@types"
 // Global
 export const SITE: Site = {
   TITLE: "Cristóbal Soto-Escobar",
-  DESCRIPTION: "Welcome to Astro Sphere, a portfolio and blog for designers and developers.",
-  AUTHOR: "Mark Horn",
+  DESCRIPTION: "Hidrólogo trabajando en precipitaciones extremas y curvas IDF en Chile. PhD entrante en UC Irvine, septiembre 2026.",
+  AUTHOR: "Cristóbal Soto-Escobar",
 }
 
 // Work Page
 export const WORK: Page = {
-  TITLE: "Work",
-  DESCRIPTION: "Places I have worked.",
+  TITLE: "CV",
+  DESCRIPTION: "Academic and professional history.",
+}
+
+// Hobbies Page
+export const HOBBIES: Page = {
+  TITLE: "Hobbies",
+  DESCRIPTION: "Coffee, photography, and places I've been.",
 }
 
 // Blog Page
@@ -33,21 +39,25 @@ export const SEARCH: Page = {
 
 // Links
 export const LINKS: Links = [
-  { 
-    TEXT: "Home", 
-    HREF: "/", 
+  {
+    TEXT: "Home",
+    HREF: "/",
   },
-  { 
-    TEXT: "Work", 
-    HREF: "/work", 
+  {
+    TEXT: "CV",
+    HREF: "/work",
   },
-  { 
-    TEXT: "Blog", 
-    HREF: "/blog", 
+  {
+    TEXT: "Blog",
+    HREF: "/blog",
   },
-  { 
-    TEXT: "IDF Curves", 
-    HREF: "https://curvasidf.cl/", 
+  {
+    TEXT: "Hobbies",
+    HREF: "/hobbies",
+  },
+  {
+    TEXT: "IDF Curves",
+    HREF: "https://curvasidf.cl/",
   },
 ]
 

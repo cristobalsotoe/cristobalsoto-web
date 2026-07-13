@@ -4,21 +4,75 @@
 
 :root {
   --copy-btn-margin: 10px;
+
+  /* 3DHome — tokens tomados del paisaje del home (cordillera, río, greda) */
+  --paper: #eef1ec;
+  --paper-raised: #e3e9e1;
+  --paper-line: #cdd5cb;
+  --ink: #1e2a26;
+  --ink-soft: #52605a;
+  --ink-faint: #7c8983;
+  --river: #2f6f6b;
+  --river-deep: #204e4b;
+  --clay: #a85a35;
+  --gold: #93712a;
+  --mist: #b9c2bc;
+
+  /* identidad del home: celeste glaciar + barra petróleo (paleta pedida por el autor) */
+  --home-bg: #eef3f4;
+  --home-bg-2: #dbe6e9;
+  --home-bar: #13313a;
+  --home-bar-ink: #f4f8f9;
+}
+
+html.dark {
+  --paper: #131d1a;
+  --paper-raised: #1a2622;
+  --paper-line: #33423c;
+  --ink: #e9ede8;
+  --ink-soft: #b1bcb5;
+  --ink-faint: #7f8d86;
+  --river: #74c2bb;
+  --river-deep: #a4dcd6;
+  --clay: #e08a5c;
+  --gold: #dcb75f;
+  --mist: #33423c;
+
+  --home-bg: #0f1c20;
+  --home-bg-2: #16282e;
+  --home-bar: #dbe6e9;
+  --home-bar-ink: #13313a;
 }
 
 @layer base {
   @font-face {
-    font-family: "Atkinson";
-    src: url("/fonts/atkinson-regular.woff") format("woff");
+    font-family: "Work Sans";
+    src: url("/fonts/work-sans.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Instrument Serif";
+    src: url("/fonts/instrument-serif.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
-    font-family: "Atkinson";
-    src: url("/fonts/atkinson-bold.woff") format("woff");
-    font-weight: 700;
+    font-family: "Instrument Serif";
+    src: url("/fonts/instrument-serif-italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Plex Mono";
+    src: url("/fonts/plex-mono.woff2") format("woff2");
+    font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
@@ -27,21 +81,136 @@
 html {
   overflow-y: scroll;
   color-scheme: light;
-  background-color: white;
-  font-family: "Atkinson", sans-serif;
-
+  background-color: var(--paper);
+  font-family: "Work Sans", sans-serif;
 }
 
 html.dark {
   color-scheme: dark;
-  background-color: black;
 }
 
 html,
 body {
   @apply h-full w-full antialiased;
-  @apply bg-white dark:bg-black;
-  @apply text-black/75 dark:text-white/75;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+.label {
+  font-family: "Plex Mono", ui-monospace, monospace;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.landmark {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+/* ============================================================
+   Identidades por sección — misma cuenca, distintas laderas.
+   Home: río (definido arriba, es el default del sitio).
+   ============================================================ */
+
+/* ---------- Blog: página impresa. Fondo de papel de diario en
+   ambos temas (decisión editorial deliberada, como BBC/NYT). ---------- */
+.ident-blog {
+  --news-paper: #faf8f2;
+  --news-ink: #1a1a18;
+  --news-gray: #55534d;
+  --news-faint: #8a877e;
+  --news-line: #d8d4c8;
+  --news-accent: #9a3b26;
+  background: var(--news-paper);
+  color: var(--news-ink);
+}
+
+.ident-blog .masthead-rule {
+  border-top: 3px double var(--news-line);
+  border-bottom: 1px solid var(--news-line);
+  height: 6px;
+}
+
+.ident-blog .news-headline {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.05;
+  text-wrap: balance;
+  color: var(--news-ink);
+}
+
+.ident-blog .kicker {
+  font-family: "Plex Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--news-accent);
+}
+
+.ident-blog a.news-link:hover .news-headline {
+  color: var(--news-accent);
+}
+
+.ident-blog article.prose {
+  --tw-prose-body: var(--news-gray);
+  --tw-prose-headings: var(--news-ink);
+  --tw-prose-links: var(--news-accent);
+  --tw-prose-bold: var(--news-ink);
+  --tw-prose-quotes: var(--news-gray);
+  --tw-prose-hr: var(--news-line);
+  --tw-prose-bullets: var(--news-faint);
+  --tw-prose-counters: var(--news-faint);
+  --tw-prose-code: var(--news-ink);
+  color: var(--news-gray);
+  font-size: 1.05rem;
+}
+
+.ident-blog article.prose h2 {
+  font-style: normal;
+}
+
+/* capitular en el primer párrafo del artículo */
+.ident-blog article.prose > p:first-of-type::first-letter {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 3.4em;
+  line-height: 0.8;
+  float: left;
+  padding-right: 0.09em;
+  padding-top: 0.05em;
+  color: var(--news-accent);
+}
+
+/* ---------- Hobbies: estío, informal, polaroids ---------- */
+.ident-hobbies .polaroid {
+  background: #fdfcf8;
+  padding: 0.6rem 0.6rem 0.5rem;
+  border: 1px solid var(--paper-line);
+  box-shadow: 0 10px 24px -14px rgba(30, 42, 38, 0.35);
+  transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 350ms ease;
+}
+html.dark .ident-hobbies .polaroid {
+  background: var(--paper-raised);
+}
+.ident-hobbies .polaroid:nth-child(3n + 1) { transform: rotate(-1.6deg); }
+.ident-hobbies .polaroid:nth-child(3n + 2) { transform: rotate(1.2deg); }
+.ident-hobbies .polaroid:nth-child(3n) { transform: rotate(-0.6deg); }
+.ident-hobbies .polaroid:hover {
+  transform: rotate(0deg) translateY(-4px) scale(1.015);
+  box-shadow: 0 18px 34px -16px rgba(30, 42, 38, 0.45);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ident-hobbies .polaroid,
+  .ident-hobbies .polaroid:hover {
+    transform: none;
+  }
 }
 
 body {
@@ -49,7 +218,8 @@ body {
 }
 
 main {
-  @apply flex flex-col flex-1 bg-white dark:bg-black;
+  @apply flex flex-col flex-1;
+  background-color: var(--paper);
 }
 
 header {
@@ -62,9 +232,8 @@ header:not(.scrolled) {
 }
 
 header.scrolled {
-  @apply bg-white/75 dark:bg-black/50;
-  @apply border-black/10 dark:border-white/25;
-  @apply backdrop-blur-sm saturate-200;
+  @apply border-mist backdrop-blur-sm saturate-200;
+  background-color: color-mix(in srgb, var(--paper) 82%, transparent);
 }
 
 article {
@@ -72,7 +241,7 @@ article {
 }
 
 .page-heading {
-  @apply font-semibold text-black dark:text-white;
+  @apply font-semibold text-ink;
 }
 
 .blend {

@@ -1,51 +1,97 @@
 ---
-import { getEntry } from "astro:content"
+import { getCollection, getEntry } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
+import CvTimeline from "@components/CvTimeline"
 import { WORK } from "@consts"
 
-// Obtenemos específicamente tu archivo cv.md de la colección "work"
-const cvEntry = await getEntry("work", "cv")
-const { Content, headings } = await cvEntry.render()
+const milestones = (await getCollection("work"))
+  .filter((entry) => entry.data.category !== "classic")
+  .sort((a, b) => b.data.dateStart.getTime() - a.data.dateStart.getTime())
+  .map((entry) => ({
+    slug: entry.slug,
+    company: entry.data.company,
+    role: entry.data.role,
+    location: entry.data.location ?? "",
+    category: entry.data.category,
+    dateStart: entry.data.dateStart.toISOString(),
+    dateEnd: typeof entry.data.dateEnd === "string" ? entry.data.dateEnd : entry.data.dateEnd.toISOString(),
+    highlights: entry.data.highlights ?? [],
+    links: entry.data.links ?? [],
+  }))
+
+const classicEntry = await getEntry("work", "classic")
+const { Content: ClassicContent } = await classicEntry.render()
 ---
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
-  <TopLayout>
-    <div class="animate page-heading">
-    </div>
-  </TopLayout>
-  
- <BottomLayout>
-    <div class="relative mt-4 animate">
-      
-      <aside class="hidden lg:block absolute right-full top-0 w-56 pr-8 h-full z-10">
-        <div class="sticky top-24">
-          <p class="font-semibold text-black dark:text-white mb-4 uppercase tracking-wider text-sm">
-            Índice
+  <div class="mx-auto max-w-screen-md px-5 pt-28 pb-20">
+
+    <!-- rótulo tipo plano de ingeniería: la personalidad de esta sección -->
+    <div class="border-2 mb-12" style="border-color: var(--ink);">
+      <div class="grid md:grid-cols-[1fr_auto]">
+        <div class="p-6 md:p-8">
+          <p class="font-mono text-[0.62rem] uppercase tracking-[0.2em] mb-3" style="color: var(--ink-faint);">
+            Expediente profesional · Rev. 2026
           </p>
-          <ul class="space-y-3 border-l border-black/10 dark:border-white/10 pl-4 text-left">
-            {headings
-              .filter((heading) => heading.depth === 2)
-              .map((heading) => (
-                <li>
-                  <a 
-                    href={`#${heading.slug}`} 
-                    class="text-sm text-black/70 dark:text-white/70 hover:text-blue-600 dark:hover:text-blue-400 transition-colors block"
-                  >
-                    {heading.text}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
+          <h1 class="serif italic text-4xl md:text-5xl" style="color: var(--ink);">
+            Cristóbal Soto-Escobar
+          </h1>
+          <p class="mt-2" style="color: var(--ink-soft);">Ingeniero civil, especialista en recursos hídricos</p>
         </div>
-      </aside>
-
-      <article class="prose dark:prose-invert max-w-none w-full">
-        <Content />
-      </article>
-
+        <div class="border-t-2 md:border-t-0 md:border-l-2 grid grid-cols-3 md:grid-cols-1 divide-x-2 md:divide-x-0 md:divide-y-2" style="border-color: var(--ink); --tw-divide-opacity: 1; divide-color: var(--ink);">
+          <div class="p-3 md:px-5 md:py-3" style="border-color: var(--ink);">
+            <p class="font-mono text-[0.55rem] uppercase tracking-[0.16em]" style="color: var(--ink-faint);">Base</p>
+            <p class="font-mono text-xs mt-0.5" style="color: var(--ink);">Temuco, CL</p>
+          </div>
+          <div class="p-3 md:px-5 md:py-3" style="border-color: var(--ink);">
+            <p class="font-mono text-[0.55rem] uppercase tracking-[0.16em]" style="color: var(--ink-faint);">Destino</p>
+            <p class="font-mono text-xs mt-0.5" style="color: var(--ink);">UC Irvine '26</p>
+          </div>
+          <div class="p-3 md:px-5 md:py-3 flex items-center" style="border-color: var(--ink);">
+            <a href="/doc/2025_CV_Cristobal_Soto_EN.pdf" download class="font-mono text-xs underline underline-offset-4 hover:text-river-deep transition-colors" style="color: var(--ink);">
+              PDF &#8595;
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </BottomLayout>
+
+    <label class="inline-flex items-center gap-3 mb-10 cursor-pointer select-none">
+      <span class="label" style="color: var(--ink-soft);">Línea de tiempo</span>
+      <span class="relative inline-block w-11 h-6 rounded-full transition-colors" style="background: var(--paper-line);">
+        <input type="checkbox" id="cv-toggle" class="peer absolute inset-0 opacity-0 cursor-pointer" />
+        <span class="absolute left-0.5 top-0.5 size-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-5" id="cv-toggle-knob" style="background: var(--paper);"></span>
+      </span>
+      <span class="label" style="color: var(--ink-soft);">Vista clásica</span>
+    </label>
+
+    <div id="cv-timeline-wrap">
+      <CvTimeline client:visible milestones={milestones} />
+    </div>
+
+    <div id="cv-classic-wrap" hidden>
+      <article class="prose max-w-none">
+        <ClassicContent />
+      </article>
+    </div>
+
+  </div>
 </PageLayout>
+
+<script is:inline>
+  function initCvToggle() {
+    const toggle = document.getElementById("cv-toggle")
+    const timelineWrap = document.getElementById("cv-timeline-wrap")
+    const classicWrap = document.getElementById("cv-classic-wrap")
+    if (!toggle || !timelineWrap || !classicWrap) return
+    function apply() {
+      const classic = toggle.checked
+      timelineWrap.hidden = classic
+      classicWrap.hidden = !classic
+    }
+    toggle.addEventListener("change", apply)
+    apply()
+  }
+  document.addEventListener("astro:after-swap", initCvToggle)
+  initCvToggle()
+</script>

@@ -1,10 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import ArticleTopLayout from "@layouts/ArticleTopLayout.astro"
-import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
+import { formatDate, readingTime } from "@lib/utils"
 
 // Create the static blog pages
 export async function getStaticPaths() {
@@ -15,21 +12,72 @@ export async function getStaticPaths() {
 	}))
 }
 
-// Get the requested post
 type Props = CollectionEntry<"blog">
 const post = Astro.props
-const { title, summary } = post.data
+const { title, summary, lang, date, source, tags } = post.data
+const { Content } = await post.render()
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+const index = posts.findIndex((x) => x.slug === post.slug)
+const prev = posts[(index - 1 + posts.length) % posts.length]
+const next = posts[(index + 1) % posts.length]
+const hasNav = posts.length > 1
 ---
 
-<PageLayout title={title} description={summary}>
-  <TopLayout>
-    <div class="animate">
-      <ArticleTopLayout entry={post}/>
+<PageLayout title={title} description={summary} lang={lang}>
+  <div class="ident-blog flex-1 -mb-px">
+    <div class="mx-auto max-w-[44rem] px-5 pt-28 pb-20">
+
+      <a href="/blog" class="kicker inline-flex items-center gap-2 hover:underline underline-offset-4">
+        &#8592; El Pluviómetro
+      </a>
+
+      <header class="mt-8 mb-10">
+        <p class="kicker mb-3">{source ?? "Nota"}</p>
+        <h1 class="news-headline text-4xl md:text-[3.2rem]">
+          {title}
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed" style="color: var(--news-gray);">
+          {summary}
+        </p>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-6 pt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em]" style="color: var(--news-faint); border-top: 1px solid var(--news-line);">
+          <span style="color: var(--news-ink);">Por Cristóbal Soto-Escobar</span>
+          <span aria-hidden="true">·</span>
+          <span>{formatDate(date)}</span>
+          <span aria-hidden="true">·</span>
+          <span>{readingTime(post.body)}</span>
+        </div>
+      </header>
+
+      <article class="prose max-w-none">
+        <Content />
+      </article>
+
+      <footer class="mt-10 pt-6" style="border-top: 1px solid var(--news-line);">
+        <ul class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li class="font-mono text-[0.65rem] uppercase tracking-[0.12em] px-2.5 py-1 border rounded-full" style="border-color: var(--news-line); color: var(--news-faint);">
+              {tag}
+            </li>
+          ))}
+        </ul>
+
+        {hasNav && (
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+            <a href={`/blog/${prev.slug}`} class="news-link group p-4 flex flex-col gap-1 border" style="border-color: var(--news-line);">
+              <span class="kicker">Anterior</span>
+              <span class="news-headline text-xl transition-colors duration-300">{prev.data.title}</span>
+            </a>
+            <a href={`/blog/${next.slug}`} class="news-link group p-4 flex flex-col gap-1 sm:items-end sm:text-right border" style="border-color: var(--news-line);">
+              <span class="kicker">Siguiente</span>
+              <span class="news-headline text-xl transition-colors duration-300">{next.data.title}</span>
+            </a>
+          </div>
+        )}
+      </footer>
+
     </div>
-  </TopLayout>
-  <BottomLayout>
-    <div class="animate">
-      <ArticleBottomLayout entry={post} />
-    </div>
-  </BottomLayout>
+  </div>
 </PageLayout>

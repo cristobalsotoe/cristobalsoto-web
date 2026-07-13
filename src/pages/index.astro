@@ -1,195 +1,167 @@
 ---
 import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
-import ArrowCard from "@components/ArrowCard"
-import StackCard from "@components/StackCard.astro"
+import Landscape3D from "@components/Landscape3D"
 import { SITE, SOCIALS } from "@consts"
-import RainShower from "@components/RainShower.astro"
+import { formatDate } from "@lib/utils"
 
 const posts = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
+  .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0,3)
 
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0,3)
-
-const stack = [
-  { 
-    text: "Astro", 
-    icon: "astro", 
-    href: "https://astro.build" 
-  },
-  { 
-    text: "Javascript", 
-    icon: "javascript", 
-    href: "https://www.javascript.com" 
-  },
-  { 
-    text: "Typescript", 
-    icon: "typescript", 
-    href: "https://www.typescriptlang.org" 
-  },
-  { 
-    text: "Tailwind", 
-    icon: "tailwind", 
-    href: "https://tailwindcss.com" 
-  },
-]
+const latest = posts[0]
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
 
+  <!-- HERO: diorama 3D al 100%, texto a la izquierda, foto como capa superior a la derecha -->
+  <section class="relative pt-20 pb-6 px-3 md:px-6" style="background:
+    radial-gradient(60rem 30rem at 85% -5%, color-mix(in srgb, var(--home-bg-2) 70%, transparent), transparent 60%),
+    radial-gradient(50rem 28rem at 0% 110%, color-mix(in srgb, var(--home-bg-2) 55%, transparent), transparent 60%),
+    var(--home-bg);">
 
-<div id="climate-bg" class="fixed inset-0 pointer-events-none z-0">
-<div class="absolute inset-0 bg-gradient-to-br from-slate-200 via-slate-200 to-slate-200 dark:from-slate-900 dark:via-sky-950 dark:to-black bg-[length:400%_400%] animate-clouds opacity-80"></div>    
+    <div class="relative mx-auto max-w-screen-xl rounded-3xl overflow-hidden border shadow-[0_18px_50px_-24px_rgba(19,49,58,0.35)]"
+         style="border-color: color-mix(in srgb, var(--home-bar) 22%, var(--home-bg-2)); height: min(80vh, 46rem); background:
+         linear-gradient(180deg, var(--home-bg-2) 0%, color-mix(in srgb, var(--home-bg-2) 45%, var(--home-bg)) 100%);">
 
-<div class="block dark:hidden absolute inset-0 overflow-hidden pointer-events-none">
-      
-      <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-yellow-100/70 rounded-full blur-[100px]"></div>
-      
-    </div>
-
-<div class="hidden dark:block">
-       <RainShower />
-    </div>
-  </div>
-
-<div class="fixed bottom-0 left-0 w-full overflow-hidden leading-[0] pointer-events-none z-0 opacity-50">
-    <svg class="block w-[200%] h-[200px] md:h-[300px] animate-wave-single" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 120" preserveAspectRatio="none">
-      <path d="M0,60 C300,120 900,0 1200,60 C1500,120 2100,0 2400,60 V120 H0 Z" class="fill-lime-500 dark:fill-sky-600"></path>
-    </svg>
-  </div>
-  
-  <!-- HERO -->
-<section class="relative h-screen w-full">
-    <div class="animate absolute h-full w-full flex items-center justify-center">
-      
-      <div class='relative w-full max-w-5xl px-5 flex flex-col md:flex-row items-center justify-center md:justify-start gap-8 md:gap-12'>
-        
-        <div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 animated">
-          <img 
-            src="/img/foto de perfil.jpeg" 
-            alt="Cristóbal Soto-Escobar" 
-            class="w-full h-full object-cover rounded-full shadow-2xl border-4 border-black/10 dark:border-white/10"
-          />
-        </div>
-
-        <div class='text-center md:text-left flex-1'>
-          <p class='animated text-lg md:text-xl lg:text-2xl font-semibold opacity-75'>
-            Hello, I am
-          </p>
-          <p class='animated text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-black dark:text-white mt-1'>
-            Cristóbal Soto-Escobar
-          </p>
-          <p class='animated text-sm md:text-base lg:text-lg opacity-75 mt-2'>
-            Civil Engineer specialized in Water Resources
-          </p>
-          
-          <div id="ctaButtons" class='animated flex flex-wrap gap-4 justify-center md:justify-start mt-6'>
-            <a href='/blog' class='py-2 px-4 rounded truncate text-xs md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend'>
-              Read my blog
-            </a>
-            <a href='/work' class='py-2 px-4 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend'>
-              View my work
-            </a>
-          </div>
-
-          <div id="ctaButtons" class='animated flex flex-wrap gap-4 justify-center md:justify-start mt-6'>
-             </div>
-
-          <div class="animated flex flex-wrap gap-5 justify-center md:justify-start mt-6 text-black/60 dark:text-white/60">
-            
-            <a href="mailto:cristobal.soto.9@gmail.com" class="hover:text-blue-500 hover:scale-110 transition-all duration-300" title="Enviar Email">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            </a>
-            
-            <a href="https://orcid.org/0009-0005-3867-6991" target="_blank" class="hover:text-[#A6CE39] hover:scale-110 transition-all duration-300" title="Perfil ORCID">
-              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
-            </a>
-            
-            <a href="https://www.linkedin.com/in/csoto24/" target="_blank" class="hover:text-[#0A66C2] hover:scale-110 transition-all duration-300" title="LinkedIn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-            
-            <a href="https://github.com/cristobalsotoescobar" target="_blank" class="hover:text-black dark:hover:text-white hover:scale-110 transition-all duration-300" title="GitHub">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.5-1.4 6.5-7a4.6 4.6 0 0 0-1.39-3.23 4.2 4.2 0 0 0-.1-3.2s-1.1-.35-3.5 1.25a11.39 11.39 0 0 0-7 0C6.2 1.6 5.1 2 5.1 2a4.2 4.2 0 0 0-.1 3.23A4.6 4.6 0 0 0 3.6 8.5c0 5.6 3.35 6.6 6.5 7a4.8 4.8 0 0 0-1 3.02V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
-            </a>
-            
-          </div>
-        </div>
-
+      <!-- capa 1: diorama interactivo, 100% del marco -->
+      <div class="absolute inset-0">
+        <Landscape3D client:load />
       </div>
-      
+
+      <!-- capa 2: contenido principal, 50% izquierdo -->
+      <div class="absolute inset-y-0 left-0 w-full md:w-[48%] flex items-end md:items-center pointer-events-none"
+           style="background: linear-gradient(90deg, color-mix(in srgb, var(--home-bg) 88%, transparent) 0%, color-mix(in srgb, var(--home-bg) 62%, transparent) 62%, transparent 100%);">
+        <div class="p-7 md:p-12 max-w-lg">
+          <p class="label mb-3">Hidrólogo · Temuco, Chile &#8594; UC Irvine 2026</p>
+          <h1 class="serif italic text-5xl md:text-6xl lg:text-7xl leading-[0.95]" style="color: var(--ink);">
+            Cristóbal<br/>Soto-Escobar
+          </h1>
+          <p class="mt-5 text-base md:text-lg max-w-sm" style="color: var(--ink-soft);">
+            Investigo precipitaciones extremas y curvas intensidad-duración-frecuencia en Chile.
+          </p>
+          <p class="mt-2 text-sm max-w-sm" style="color: var(--ink-faint);">
+            Este diorama es el viaje que viene: maneja el auto desde las casas de Temuco hasta el letrero de Irvine.
+          </p>
+          <div class="flex flex-wrap gap-3 mt-6 pointer-events-auto">
+            <a href="/work" class="label px-4 py-2 rounded-full transition-colors" style="background: var(--home-bar); color: var(--home-bar-ink);">
+              Ver CV
+            </a>
+            <a href="/blog" class="label px-4 py-2 rounded-full border transition-colors hover:bg-paper-raised" style="border-color: var(--ink-faint); color: var(--ink);">
+              Leer el blog
+            </a>
+          </div>
+          <div class="flex flex-wrap gap-4 mt-6 pointer-events-auto" style="color: var(--ink-faint);">
+            <a href="mailto:cristobal.soto.9@gmail.com" class="hover:text-river-deep transition-colors" title="Enviar Email" aria-label="Email">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+            <a href="https://orcid.org/0009-0005-3867-6991" target="_blank" rel="noopener noreferrer" class="hover:text-river-deep transition-colors" title="Perfil ORCID" aria-label="ORCID">
+              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/csoto24/" target="_blank" rel="noopener noreferrer" class="hover:text-river-deep transition-colors" title="LinkedIn" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/cristobalsotoescobar" target="_blank" rel="noopener noreferrer" class="hover:text-river-deep transition-colors" title="GitHub" aria-label="GitHub">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.5-1.4 6.5-7a4.6 4.6 0 0 0-1.39-3.23 4.2 4.2 0 0 0-.1-3.2s-1.1-.35-3.5 1.25a11.39 11.39 0 0 0-7 0C6.2 1.6 5.1 2 5.1 2a4.2 4.2 0 0 0-.1 3.23A4.6 4.6 0 0 0 3.6 8.5c0 5.6 3.35 6.6 6.5 7a4.8 4.8 0 0 0-1 3.02V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- capa 3: foto de perfil, capa superior del lado derecho -->
+      <div class="hidden md:block absolute top-8 right-8 lg:top-10 lg:right-12 pointer-events-none">
+        <div class="relative">
+          <img
+            src="/img/foto de perfil.jpeg"
+            alt="Cristóbal Soto-Escobar"
+            class="size-36 lg:size-44 object-cover rounded-full ring-4 shadow-[0_10px_30px_-12px_rgba(19,49,58,0.45)]"
+            style="--tw-ring-color: var(--home-bg);"
+          />
+          <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 label whitespace-nowrap px-2.5 py-1 rounded-full" style="background: var(--home-bar); color: var(--home-bar-ink); font-size: 0.6rem;">
+            ese soy yo
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- el viaje, en permanente: barra acentuada con mensaje + coordenadas -->
+    <div class="mx-auto max-w-screen-xl mt-4 rounded-2xl px-6 py-4 md:px-8 flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 shadow-[0_12px_32px_-18px_rgba(19,49,58,0.55)]"
+         style="background: var(--home-bar);">
+      <p class="serif italic text-lg md:text-xl text-center md:text-left" style="color: var(--home-bar-ink);">
+        En septiembre de 2026 me estaré mudando a California, para empezar mi PhD en UC,&nbsp;Irvine.
+      </p>
+      <p class="font-mono text-[0.65rem] tracking-[0.18em] uppercase text-center md:text-right whitespace-nowrap" style="color: color-mix(in srgb, var(--home-bar-ink) 62%, transparent);">
+        38°44′S 72°35′W &#8594; 33°38′N 117°50′W
+      </p>
     </div>
   </section>
 
-  <div class="relative bg-white dark:bg-black">
-    <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+  <div style="background: var(--home-bg);">
 
-      <!-- About Section -->
-      <section class="animate">
-    <article>
-  <p>I am a <b>Civil Engineer</b>, <b>water resources specialist</b>, <b>researcher</b>, <b>data analyst</b>, and <b>climate enthusiast</b>.</p>
-  <p>I have a strong interest in hydrology and climate. My work focuses on the analysis of extreme precipitation events in the context of a changing climate, the application of gridded datasets in hydrological studies, and the integrated modeling of surface and groundwater systems using coupled hydrological models.</p>
-  <p><b>During my career</b></p>
-  <p>I have contributed to projects ranging from Strategic Water Resource Management Plans with the Chilean Water Directorate to the development of interactive web platforms and high resolution spatial Intensity, Duration, and Frequency curves.</p>
-  <p><b>Now</b></p>
-  <p>I currently work as a Consulting Engineer at ICASS Spa, where I lead integrated modeling efforts, and I am preparing for my doctoral studie starting in Fall, 2026.</p>
-</article>
-      </section>
+  <!-- foto en móvil (la capa superior no cabe) -->
+  <div class="md:hidden flex justify-center pt-4 -mb-6">
+    <img src="/img/foto de perfil.jpeg" alt="Cristóbal Soto-Escobar" class="size-28 object-cover rounded-full ring-4" style="--tw-ring-color: var(--home-bg-2);" />
+  </div>
 
-      <!-- Blog Preview Section -->
-      <section class="animate">
-        <div class="space-y-4">
-          <div class="flex justify-between">
-            <p class="font-semibold text-black dark:text-white">
-              Recent posts
-            </p>
-            <a href="/blog" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                All posts
-              </span>
-            </a>
+  <div class="mx-auto max-w-screen-md px-5 space-y-16 py-16">
+
+    {latest && (
+      <!-- Lo más reciente: recorte de "El Pluviómetro", con el mismo lenguaje del blog -->
+      <section class="ident-blog border rounded-sm shadow-[0_14px_36px_-22px_rgba(30,42,38,0.4)]" style="border-color: var(--news-line);">
+        <div class="p-6 md:p-8">
+          <div class="flex items-baseline justify-between gap-4 pb-4 mb-6" style="border-bottom: 3px double var(--news-line);">
+            <span class="kicker">Lo más reciente</span>
+            <a href="/blog" class="news-headline text-lg hover:underline underline-offset-4">El Pluviómetro</a>
           </div>
-          <ul class="space-y-4">
-            {posts.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
-            ))}
-          </ul>
+          <a href={`/blog/${latest.slug}`} class="news-link group grid md:grid-cols-[1fr_13rem] gap-6 items-start">
+            <div>
+              <p class="kicker mb-2">{latest.data.source ?? "Nota"}</p>
+              <h2 class="news-headline text-3xl md:text-4xl transition-colors duration-300">
+                {latest.data.title}
+              </h2>
+              <p class="mt-3 leading-relaxed" style="color: var(--news-gray);">
+                {latest.data.summary}
+              </p>
+              <div class="flex flex-wrap gap-x-4 mt-4 font-mono text-[0.62rem] uppercase tracking-[0.14em]" style="color: var(--news-faint);">
+                <span>{formatDate(latest.data.date)}</span>
+                <span>Leer el artículo &#8594;</span>
+              </div>
+            </div>
+            {latest.data.image && (
+              <img src={latest.data.image} alt="" class="w-full border" style="border-color: var(--news-line);" loading="lazy" />
+            )}
+          </a>
         </div>
       </section>
+    )}
 
-      <!-- Contact Section -->
-      <section class="animate">
-        <div>
-          <p class="font-semibold text-black dark:text-white">
-            Let's Connect
-          </p>
-          <p>
-            Reach out to me via email or on social media.
-          </p>
-          <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
-            {SOCIALS.map(social => (
-              <div class="col-span-1 flex items-center gap-1">
-                <span class="whitespace-nowrap truncate">
-                  {social.NAME}
-                </span>
-              </div>
-              <div class="col-span-3 truncate">
-                <a href={social.HREF} target="_blank" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-                  <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                    {social.TEXT}
-                  </span>
-                </a>
-              </div>
-            ))}
-        </div>
-      </section>
-    </div>
+    <!-- Acerca de mí -->
+    <section class="pt-14 border-t" style="border-color: color-mix(in srgb, var(--home-bar) 18%, var(--home-bg-2));">
+      <p class="label mb-2">Quién escribe</p>
+      <h2 class="serif italic text-3xl md:text-4xl mb-6" style="color: var(--ink);">Acerca de mí</h2>
+      <article class="prose max-w-none" style="color: var(--ink-soft);">
+        <p>Soy <b style="color: var(--ink);">ingeniero civil</b>, especialista en <b style="color: var(--ink);">recursos hídricos</b> e investigador. Mi trabajo se centra en el análisis de eventos de precipitación extrema en un clima cambiante, el uso de datos grillados en estudios hidrológicos, y el modelamiento integrado de aguas superficiales y subterráneas.</p>
+        <p>He participado en proyectos que van desde Planes Estratégicos de Gestión Hídrica con la Dirección General de Aguas de Chile hasta el desarrollo de plataformas web interactivas y curvas de Intensidad-Duración-Frecuencia de alta resolución espacial.</p>
+        <p>Actualmente trabajo como ingeniero consultor en ICASS Spa, liderando esfuerzos de modelamiento integrado, mientras me preparo para comenzar mi doctorado en septiembre de 2026.</p>
+      </article>
+    </section>
+
+    <!-- Conversemos -->
+    <section class="rounded-2xl p-7 md:p-9" style="background: var(--home-bg-2); border: 1px solid color-mix(in srgb, var(--home-bar) 18%, var(--home-bg-2));">
+      <p class="label mb-2">Correo, redes y perfiles</p>
+      <h2 class="serif italic text-3xl md:text-4xl mb-6" style="color: var(--ink);">Conversemos</h2>
+      <div class="grid grid-cols-[6rem_1fr] gap-y-2.5" style="color: var(--ink-soft);">
+        {SOCIALS.map((social) => (
+          <>
+            <span class="text-sm">{social.NAME}</span>
+            <a href={social.HREF} target="_blank" rel="noopener noreferrer" class="text-sm underline decoration-1 underline-offset-2 hover:text-river-deep transition-colors w-fit" style="color: var(--ink);">
+              {social.TEXT}
+            </a>
+          </>
+        ))}
+      </div>
+    </section>
+  </div>
+
   </div>
 </PageLayout>

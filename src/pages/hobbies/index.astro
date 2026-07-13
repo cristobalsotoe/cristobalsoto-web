@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import { HOBBIES } from "@consts"
+
+const items = (await getCollection("hobbies")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+)
+---
+
+<PageLayout title={HOBBIES.TITLE} description={HOBBIES.DESCRIPTION}>
+  <div class="ident-hobbies flex-1">
+    <div class="mx-auto max-w-screen-md px-5 pt-28 pb-20">
+      <p class="label mb-2" style="color: var(--gold);">Fuera del trabajo</p>
+      <h1 class="serif italic text-4xl md:text-6xl mb-3" style="color: var(--ink);">
+        Las otras cuencas
+      </h1>
+      <p class="max-w-xl mb-14" style="color: var(--ink-soft);">
+        Café, fotografía, y lugares donde he estado. Menos rigor, más caminata — esta sección todavía está creciendo.
+      </p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:gap-8">
+        {items.map((item) => (
+          <figure class="polaroid rounded-sm">
+            <img
+              src={item.data.image}
+              alt={item.data.caption}
+              loading="lazy"
+              class="w-full aspect-square object-cover"
+            />
+            <figcaption class="pt-2.5 pb-1 px-0.5">
+              <span class="block font-mono uppercase tracking-[0.14em] text-[0.58rem] mb-0.5" style="color: var(--gold);">
+                {item.data.tag}
+              </span>
+              <span class="serif italic text-sm leading-snug" style="color: var(--ink-soft);">
+                {item.data.caption}
+              </span>
+            </figcaption>
+          </figure>
+        ))}
+
+        <div class="polaroid rounded-sm flex flex-col">
+          <div class="w-full aspect-square flex items-center justify-center border border-dashed" style="border-color: var(--paper-line); background: var(--paper);">
+            <span class="serif italic text-lg text-center px-4" style="color: var(--ink-faint);">próxima foto,<br/>en revelado</span>
+          </div>
+          <div class="pt-2.5 pb-1 px-0.5">
+            <span class="block font-mono uppercase tracking-[0.14em] text-[0.58rem]" style="color: var(--gold);">pronto</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</PageLayout>

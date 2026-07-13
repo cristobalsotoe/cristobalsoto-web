@@ -29,13 +29,14 @@ function changeTheme() {
 }
 
 function preloadTheme() {
+  // Fondo claro por defecto: solo se usa dark si el usuario lo eligió con el toggle.
   const theme = (() => {
     const userTheme = localStorage.theme
 
     if (userTheme === "light" || userTheme === "dark") {
       return userTheme
     } else {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+      return "light"
     }
   })()
 

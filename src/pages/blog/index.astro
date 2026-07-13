@@ -1,46 +1,94 @@
 ---
-import { getCollection } from "astro:content";
-import PageLayout from "@layouts/PageLayout.astro";
-import TopLayout from "@layouts/TopLayout.astro";
-import BottomLayout from "@layouts/BottomLayout.astro";
-import SearchCollection from "@components/SearchCollection";
-import { BLOG } from "@consts";
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import { BLOG } from "@consts"
+import { formatDate, readingTime } from "@lib/utils"
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 
-const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
-  (a, b) => a.localeCompare(b),
-);
+const [lead, ...rest] = posts
 
-const estimated_initial_size =
-  28 + posts.length * 158 + (posts.length - 1) * 12;
+const today = new Date().toLocaleDateString("es-CL", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+})
 ---
 
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
-  <TopLayout>
-    <div class="animate">
-      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
-        {BLOG.TITLE}
-      </h1>
-      <div class="mt-1">
-        {BLOG.DESCRIPTION}
-      </div>
+  <div class="ident-blog flex-1 -mb-px">
+    <div class="mx-auto max-w-screen-lg px-5 pt-28 pb-20">
+
+      <!-- masthead de diario -->
+      <header class="text-center mb-10">
+        <div class="masthead-rule mb-5"></div>
+        <p class="kicker mb-2">Notas de hidrología, clima y datos</p>
+        <h1 class="news-headline text-6xl md:text-7xl">El Pluviómetro</h1>
+        <div class="flex items-center justify-center gap-4 mt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em]" style="color: var(--news-faint);">
+          <span>{today}</span>
+          <span aria-hidden="true">·</span>
+          <span>Temuco — Irvine</span>
+          <span aria-hidden="true">·</span>
+          <span>por Cristóbal Soto-Escobar</span>
+        </div>
+        <div class="masthead-rule mt-5" style="transform: scaleY(-1);"></div>
+      </header>
+
+      {lead && (
+        <!-- nota principal -->
+        <a href={`/blog/${lead.slug}`} class="news-link block group">
+          <article class="grid md:grid-cols-[1fr_16rem] gap-8 items-start pb-10" style="border-bottom: 1px solid var(--news-line);">
+            <div>
+              <p class="kicker mb-3">{lead.data.source ?? "Portada"}</p>
+              <h2 class="news-headline text-4xl md:text-5xl transition-colors duration-300">
+                {lead.data.title}
+              </h2>
+              <p class="mt-4 text-lg leading-relaxed max-w-2xl" style="color: var(--news-gray);">
+                {lead.data.summary}
+              </p>
+              <div class="flex flex-wrap gap-x-4 gap-y-1 mt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em]" style="color: var(--news-faint);">
+                <span>{formatDate(lead.data.date)}</span>
+                <span>{readingTime(lead.body)}</span>
+              </div>
+            </div>
+            {lead.data.image && (
+              <img src={lead.data.image} alt="" class="w-full border" style="border-color: var(--news-line);" loading="lazy" />
+            )}
+          </article>
+        </a>
+      )}
+
+      <!-- resto de notas, en columnas de diario -->
+      {rest.length > 0 && (
+        <div class="grid sm:grid-cols-2 gap-x-10 gap-y-8 mt-10">
+          {rest.map((post) => (
+            <a href={`/blog/${post.slug}`} class="news-link block group pb-8" style="border-bottom: 1px solid var(--news-line);">
+              <article class:list={[post.data.image && "grid grid-cols-[7.5rem_1fr] sm:grid-cols-[9rem_1fr] gap-4 items-start"]}>
+                {post.data.image && (
+                  <img src={post.data.image} alt="" class="w-full border" style="border-color: var(--news-line);" loading="lazy" />
+                )}
+                <div>
+                  <p class="kicker mb-2">{post.data.source ?? "Nota"}</p>
+                  <h3 class="news-headline text-2xl md:text-[1.7rem] transition-colors duration-300">
+                    {post.data.title}
+                  </h3>
+                  <p class="mt-2 text-sm leading-relaxed line-clamp-3" style="color: var(--news-gray);">
+                    {post.data.summary}
+                  </p>
+                  <div class="flex flex-wrap gap-x-4 mt-3 font-mono text-[0.62rem] uppercase tracking-[0.14em]" style="color: var(--news-faint);">
+                    <span>{formatDate(post.data.date)}</span>
+                    <span>{readingTime(post.body)}</span>
+                  </div>
+                </div>
+              </article>
+            </a>
+          ))}
+        </div>
+      )}
+
     </div>
-  </TopLayout>
-  <BottomLayout>
-    <div
-      id="search-collection-wrapper"
-      class="animate"
-      style={{ minHeight: `${estimated_initial_size}px` }}
-    >
-      <SearchCollection
-        client:load
-        entry_name={"posts"}
-        tags={tags}
-        data={posts}
-      />
-    </div>
-  </BottomLayout>
+  </div>
 </PageLayout>

@@ -5,31 +5,41 @@ const { pathname } = Astro.url
 const subpath = pathname.match(/[^/]+/g)
 ---
 
-<div id="drawer" class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center md:hidden bg-neutral-100 dark:bg-neutral-900 transition-[height] duration-300 ease-in-out">
+<div id="drawer" class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center md:hidden transition-[height] duration-300 ease-in-out" style="background-color: var(--paper-raised);">
   <nav class="flex flex-col items-center space-y-2">
     {
-      LINKS.map((LINK) => (
-        <a href={LINK.HREF} class={cn("flex items-center justify-center px-3 py-1 rounded-full", "text-current hover:text-black dark:hover:text-white", "hover:bg-black/5 dark:hover:bg-white/20", "transition-colors duration-300 ease-in-out", pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black" : "")}>
-          {LINK.TEXT}
-        </a>
-      ))
+      LINKS.map((LINK) => {
+        const external = LINK.HREF.startsWith("http")
+        const active = pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
+        return (
+          <a
+            href={LINK.HREF}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
+            class={cn("label flex items-center justify-center gap-1 px-3 py-1 rounded-full", "text-ink-soft hover:text-river-deep", "hover:bg-paper", "transition-colors duration-300 ease-in-out", active ? "pointer-events-none bg-ink text-paper" : "")}
+          >
+            {LINK.TEXT}
+            {external && <span aria-hidden="true">&#8599;</span>}
+          </a>
+        )
+      })
     }
   </nav>
 
   <div class="flex gap-1 mt-5">
-    <a href="/search" aria-label={`Search blog posts and projects on ${SITE.TITLE}`} class={cn("size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out", pathname === "/search" || "/" + subpath?.[0] === "search" ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black" : "")}>
+    <a href="/search" aria-label={`Search blog posts and projects on ${SITE.TITLE}`} class={cn("size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-paper stroke-ink-faint hover:stroke-river-deep border border-mist transition-colors duration-300 ease-in-out", pathname === "/search" || "/" + subpath?.[0] === "search" ? "pointer-events-none bg-ink text-paper" : "")}>
       <svg class="size-full">
         <use href="/ui.svg#search"></use>
       </svg>
     </a>
 
-    <a href="/rss.xml" target="_blank" aria-label={`Rss feed for ${SITE.TITLE}`} class="size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out">
+    <a href="/rss.xml" target="_blank" aria-label={`Rss feed for ${SITE.TITLE}`} class="size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-paper stroke-ink-faint hover:stroke-river-deep border border-mist transition-colors duration-300 ease-in-out">
       <svg class="size-full">
         <use href="/ui.svg#rss"></use>
       </svg>
     </a>
 
-    <button id="drawer-theme-button" aria-label={`Toggle light and dark theme`} class="size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out">
+    <button id="drawer-theme-button" aria-label={`Toggle light and dark theme`} class="size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-paper stroke-ink-faint hover:stroke-river-deep border border-mist transition-colors duration-300 ease-in-out">
       <svg class="block dark:hidden size-full">
         <use href="/ui.svg#sun"></use>
       </svg>

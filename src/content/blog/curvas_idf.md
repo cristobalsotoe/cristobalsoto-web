@@ -3,6 +3,9 @@ title: "New Publication: Developing IDF curves using sub-daily gridded and in si
 summary: "We address the critical challenge of estimating precipitation extremes in data-scarce regions in our latest article about Intensity, Duration and Frequency curves in Chile."
 date: "Jan 17 2026"
 draft: false
+lang: "en"
+source: "Nota de campo"
+image: "/img/idf-plataforma-preview.webp"
 tags:
 - Hydrology
 - Extreme Events
