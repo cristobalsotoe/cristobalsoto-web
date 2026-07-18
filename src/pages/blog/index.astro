@@ -8,8 +8,6 @@ const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 
-const [lead, ...rest] = posts
-
 const today = new Date().toLocaleDateString("es-CL", {
   weekday: "long",
   year: "numeric",
@@ -37,57 +35,31 @@ const today = new Date().toLocaleDateString("es-CL", {
         <div class="masthead-rule mt-5" style="transform: scaleY(-1);"></div>
       </header>
 
-      {lead && (
-        <!-- nota principal -->
-        <a href={`/blog/${lead.slug}`} class="news-link block group">
-          <article class="grid md:grid-cols-[1fr_16rem] gap-8 items-start pb-10" style="border-bottom: 1px solid var(--news-line);">
-            <div>
-              <p class="kicker mb-3">{lead.data.source ?? "Portada"}</p>
-              <h2 class="news-headline text-4xl md:text-5xl transition-colors duration-300">
-                {lead.data.title}
-              </h2>
-              <p class="mt-4 text-lg leading-relaxed max-w-2xl" style="color: var(--news-gray);">
-                {lead.data.summary}
-              </p>
-              <div class="flex flex-wrap gap-x-4 gap-y-1 mt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em]" style="color: var(--news-faint);">
-                <span>{formatDate(lead.data.date)}</span>
-                <span>{readingTime(lead.body)}</span>
-              </div>
-            </div>
-            {lead.data.image && (
-              <img src={lead.data.image} alt="" class="w-full border" style="border-color: var(--news-line);" loading="lazy" />
-            )}
-          </article>
-        </a>
-      )}
-
-      <!-- resto de notas, en columnas de diario -->
-      {rest.length > 0 && (
-        <div class="grid sm:grid-cols-2 gap-x-10 gap-y-8 mt-10">
-          {rest.map((post) => (
-            <a href={`/blog/${post.slug}`} class="news-link block group pb-8" style="border-bottom: 1px solid var(--news-line);">
-              <article class:list={[post.data.image && "grid grid-cols-[7.5rem_1fr] sm:grid-cols-[9rem_1fr] gap-4 items-start"]}>
-                {post.data.image && (
-                  <img src={post.data.image} alt="" class="w-full border" style="border-color: var(--news-line);" loading="lazy" />
-                )}
-                <div>
-                  <p class="kicker mb-2">{post.data.source ?? "Nota"}</p>
-                  <h3 class="news-headline text-2xl md:text-[1.7rem] transition-colors duration-300">
-                    {post.data.title}
-                  </h3>
-                  <p class="mt-2 text-sm leading-relaxed line-clamp-3" style="color: var(--news-gray);">
-                    {post.data.summary}
-                  </p>
-                  <div class="flex flex-wrap gap-x-4 mt-3 font-mono text-[0.62rem] uppercase tracking-[0.14em]" style="color: var(--news-faint);">
-                    <span>{formatDate(post.data.date)}</span>
-                    <span>{readingTime(post.body)}</span>
-                  </div>
+      <!-- todas las notas: lista vertical, misma estructura que el destacado -->
+      <div class="space-y-10">
+        {posts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="news-link block group">
+            <article class:list={["pb-10", post.data.image && "grid md:grid-cols-[1fr_16rem] gap-8 items-start"]} style="border-bottom: 1px solid var(--news-line);">
+              <div>
+                <p class="kicker mb-3">{post.data.source ?? "Nota"}</p>
+                <h2 class="news-headline text-4xl md:text-5xl transition-colors duration-300">
+                  {post.data.title}
+                </h2>
+                <p class="mt-4 text-lg leading-relaxed max-w-2xl" style="color: var(--news-gray);">
+                  {post.data.summary}
+                </p>
+                <div class="flex flex-wrap gap-x-4 gap-y-1 mt-4 font-mono text-[0.65rem] uppercase tracking-[0.14em]" style="color: var(--news-faint);">
+                  <span>{formatDate(post.data.date)}</span>
+                  <span>{readingTime(post.body)}</span>
                 </div>
-              </article>
-            </a>
-          ))}
-        </div>
-      )}
+              </div>
+              {post.data.image && (
+                <img src={post.data.image} alt="" class="w-full border" style="border-color: var(--news-line);" loading="lazy" />
+              )}
+            </article>
+          </a>
+        ))}
+      </div>
 
     </div>
   </div>

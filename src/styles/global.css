@@ -5,43 +5,44 @@
 :root {
   --copy-btn-margin: 10px;
 
-  /* 3DHome — tokens tomados del paisaje del home (cordillera, río, greda) */
-  --paper: #eef1ec;
-  --paper-raised: #e3e9e1;
-  --paper-line: #cdd5cb;
-  --ink: #1e2a26;
-  --ink-soft: #52605a;
-  --ink-faint: #7c8983;
-  --river: #2f6f6b;
-  --river-deep: #204e4b;
-  --clay: #a85a35;
-  --gold: #93712a;
-  --mist: #b9c2bc;
+  /* 3DHome — paleta "Slate & Arena": subconjunto sobrio derivado de las
+     paletas de mapas del skill hydro-r (slate-teal + acento terracota) */
+  --paper: #f6f6f3;
+  --paper-raised: #ecece6;
+  --paper-line: #d9d8d1;
+  --ink: #202529;
+  --ink-soft: #4d545b;
+  --ink-faint: #858c92;
+  --river: #3a6b7c;
+  --river-deep: #2b5361;
+  --clay: #c04730;
+  --gold: #c2994d;
+  --mist: #cacbc3;
 
-  /* identidad del home: celeste glaciar + barra petróleo (paleta pedida por el autor) */
-  --home-bg: #eef3f4;
-  --home-bg-2: #dbe6e9;
-  --home-bar: #13313a;
-  --home-bar-ink: #f4f8f9;
+  /* identidad del home: papel neutro + barra slate (paleta Slate & Arena) */
+  --home-bg: #f0f1ed;
+  --home-bg-2: #e0e2db;
+  --home-bar: #232a2e;
+  --home-bar-ink: #f3f4f0;
 }
 
 html.dark {
-  --paper: #131d1a;
-  --paper-raised: #1a2622;
-  --paper-line: #33423c;
-  --ink: #e9ede8;
-  --ink-soft: #b1bcb5;
-  --ink-faint: #7f8d86;
-  --river: #74c2bb;
-  --river-deep: #a4dcd6;
-  --clay: #e08a5c;
-  --gold: #dcb75f;
-  --mist: #33423c;
+  --paper: #16191c;
+  --paper-raised: #1e2226;
+  --paper-line: #333a3f;
+  --ink: #e8eae6;
+  --ink-soft: #aab2b8;
+  --ink-faint: #7e878d;
+  --river: #6fa9ba;
+  --river-deep: #97c6d3;
+  --clay: #d9694f;
+  --gold: #d8b56a;
+  --mist: #333a3f;
 
-  --home-bg: #0f1c20;
-  --home-bg-2: #16282e;
-  --home-bar: #dbe6e9;
-  --home-bar-ink: #13313a;
+  --home-bg: #12161a;
+  --home-bg-2: #1b2024;
+  --home-bar: #dfe2dc;
+  --home-bar-ink: #202529;
 }
 
 @layer base {
