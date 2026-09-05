@@ -5,44 +5,44 @@
 :root {
   --copy-btn-margin: 10px;
 
-  /* 3DHome — paleta "Slate & Arena": subconjunto sobrio derivado de las
-     paletas de mapas del skill hydro-r (slate-teal + acento terracota) */
-  --paper: #f6f6f3;
-  --paper-raised: #ecece6;
-  --paper-line: #d9d8d1;
-  --ink: #202529;
-  --ink-soft: #4d545b;
-  --ink-faint: #858c92;
-  --river: #3a6b7c;
-  --river-deep: #2b5361;
+  /* 3DHome — paleta "Río & Arena": neutros y acentos azulados alineados
+     con curvasidf.cl (navy + rain), con clay/gold como acentos cálidos */
+  --paper: #fbfcfd;
+  --paper-raised: #f0f5f8;
+  --paper-line: #d9e4ea;
+  --ink: #112435;
+  --ink-soft: #587083;
+  --ink-faint: #63788a;
+  --river: #20517f;
+  --river-deep: #153a5f;
   --clay: #c04730;
   --gold: #c2994d;
-  --mist: #cacbc3;
+  --mist: #cbe0e5;
 
-  /* identidad del home: papel neutro + barra slate (paleta Slate & Arena) */
-  --home-bg: #f0f1ed;
-  --home-bg-2: #e0e2db;
-  --home-bar: #232a2e;
-  --home-bar-ink: #f3f4f0;
+  /* identidad del home: papel azulado + barra navy */
+  --home-bg: #f3f7f9;
+  --home-bg-2: #dce8f1;
+  --home-bar: #0f2d4a;
+  --home-bar-ink: #f3f7f9;
 }
 
 html.dark {
-  --paper: #16191c;
-  --paper-raised: #1e2226;
-  --paper-line: #333a3f;
-  --ink: #e8eae6;
-  --ink-soft: #aab2b8;
-  --ink-faint: #7e878d;
-  --river: #6fa9ba;
-  --river-deep: #97c6d3;
+  --paper: #0d1a26;
+  --paper-raised: #132436;
+  --paper-line: #263c50;
+  --ink: #e6eef4;
+  --ink-soft: #a3b6c4;
+  --ink-faint: #8399a8;
+  --river: #79adbb;
+  --river-deep: #a8cfda;
   --clay: #d9694f;
   --gold: #d8b56a;
-  --mist: #333a3f;
+  --mist: #263c50;
 
-  --home-bg: #12161a;
-  --home-bg-2: #1b2024;
-  --home-bar: #dfe2dc;
-  --home-bar-ink: #202529;
+  --home-bg: #0a1926;
+  --home-bg-2: #132436;
+  --home-bar: #dce8f1;
+  --home-bar-ink: #112435;
 }
 
 @layer base {
@@ -104,6 +104,13 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-faint);
+}
+
+/* los titulos del sitio usan .serif; sin esta regla caian en Work Sans
+   con italica sintetica en vez de Instrument Serif */
+.serif {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
 }
 
 .landmark {
@@ -191,10 +198,10 @@ body {
 
 /* ---------- Hobbies: estío, informal, polaroids ---------- */
 .ident-hobbies .polaroid {
-  background: #fdfcf8;
+  background: #fcfdfe;
   padding: 0.6rem 0.6rem 0.5rem;
   border: 1px solid var(--paper-line);
-  box-shadow: 0 10px 24px -14px rgba(30, 42, 38, 0.35);
+  box-shadow: 0 10px 24px -14px rgba(17, 36, 53, 0.35);
   transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 350ms ease;
 }
 html.dark .ident-hobbies .polaroid {
@@ -205,7 +212,7 @@ html.dark .ident-hobbies .polaroid {
 .ident-hobbies .polaroid:nth-child(3n) { transform: rotate(-0.6deg); }
 .ident-hobbies .polaroid:hover {
   transform: rotate(0deg) translateY(-4px) scale(1.015);
-  box-shadow: 0 18px 34px -16px rgba(30, 42, 38, 0.45);
+  box-shadow: 0 18px 34px -16px rgba(17, 36, 53, 0.45);
 }
 @media (prefers-reduced-motion: reduce) {
   .ident-hobbies .polaroid,

@@ -560,7 +560,7 @@ export default function Landscape3D() {
         </Show>
 
         <div class="sr-only">
-          En septiembre de 2026 comienzo mi doctorado en UC Irvine, mudándome desde Temuco, Chile.
+          Diorama del viaje de Temuco, Chile, a Irvine, California, donde curso mi doctorado en UC Irvine.
         </div>
 
         <div class="md:hidden absolute bottom-4 right-4 grid grid-cols-3 grid-rows-2 gap-1.5 w-32 select-none">
@@ -576,7 +576,7 @@ export default function Landscape3D() {
       <Show when={!supported()}>
         <div class="w-full h-full flex items-center justify-center px-8" style="background: linear-gradient(180deg, var(--paper) 0%, var(--paper-raised) 100%);">
           <p class="serif italic text-2xl md:text-4xl text-center max-w-lg" style="color: var(--ink);">
-            De Temuco a Irvine — en septiembre de 2026 empiezo mi PhD en UC Irvine.
+            De Temuco a Irvine — cursando mi PhD en UC Irvine.
           </p>
         </div>
       </Show>

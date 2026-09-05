@@ -7,6 +7,9 @@ import solidJs from "@astrojs/solid-js"
 // https://astro.build/config
 export default defineConfig({
   site: 'https://cristobalsoto.cl',
+  redirects: {
+    '/hobbies': '/not-cv',
+  },
   integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
 })
 

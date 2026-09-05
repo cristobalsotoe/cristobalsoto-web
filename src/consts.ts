@@ -3,7 +3,7 @@ import type { Site, Page, Links, Socials } from "@types"
 // Global
 export const SITE: Site = {
   TITLE: "Cristóbal Soto-Escobar",
-  DESCRIPTION: "Hidrólogo trabajando en precipitaciones extremas y curvas IDF en Chile. PhD entrante en UC Irvine, septiembre 2026.",
+  DESCRIPTION: "Hidrólogo trabajando en precipitaciones extremas y curvas IDF en Chile. Estudiante de doctorado en UC Irvine.",
   AUTHOR: "Cristóbal Soto-Escobar",
 }
 
@@ -13,10 +13,10 @@ export const WORK: Page = {
   DESCRIPTION: "Academic and professional history.",
 }
 
-// Hobbies Page
-export const HOBBIES: Page = {
-  TITLE: "Hobbies",
-  DESCRIPTION: "Coffee, photography, and places I've been.",
+// Not CV Page
+export const NOT_CV: Page = {
+  TITLE: "Not CV",
+  DESCRIPTION: "Café, fotografía y los lugares donde he estado.",
 }
 
 // Blog Page
@@ -52,8 +52,8 @@ export const LINKS: Links = [
     HREF: "/blog",
   },
   {
-    TEXT: "Hobbies",
-    HREF: "/hobbies",
+    TEXT: "Not CV",
+    HREF: "/not-cv",
   },
   {
     TEXT: "IDF Curves",

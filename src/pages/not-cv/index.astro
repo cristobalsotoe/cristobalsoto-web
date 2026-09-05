@@ -1,0 +1,300 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import { NOT_CV } from "@consts"
+
+const GALLERY_URL = "https://lightroom.adobe.com/shares/a7cd0f056d4744b0b609d799cb46cf8d"
+---
+
+<PageLayout title={NOT_CV.TITLE} description={NOT_CV.DESCRIPTION}>
+  <div class="ident-hobbies flex-1">
+    <div class="mx-auto max-w-screen-lg px-5 pt-28 pb-24">
+      <h1 class="serif italic text-4xl md:text-6xl mb-3" style="color: var(--ink);">
+        Las otras cuencas
+      </h1>
+      <p class="max-w-xl mb-12 md:mb-16" style="color: var(--ink-soft);">
+        Café, fotografía, y lugares donde he estado. Menos rigor, más caminata.
+      </p>
+
+      <!-- visor: la fotografía es la puerta al archivo completo -->
+      <a
+        class="viewfinder"
+        href={GALLERY_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="viewfinder__stack viewfinder__stack--b" aria-hidden="true"></span>
+        <span class="viewfinder__stack viewfinder__stack--a" aria-hidden="true"></span>
+
+        <span class="viewfinder__frame">
+          <img
+            class="viewfinder__photo"
+            src="/img/socal-palms.webp"
+            alt=""
+            width="1800"
+            height="1200"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+          <span class="viewfinder__scrim" aria-hidden="true"></span>
+
+          <!-- hoja de palmera: silueta de primer plano que se mece con la brisa -->
+          <svg class="vf-frond vf-frond--l" viewBox="0 0 210 130" aria-hidden="true" focusable="false">
+            <g class="vf-frond__sway">
+              <path class="vf-frond__rachis" d="M0.0 0.0 Q78.0 26.0 172.0 54.0"/>
+              <path d="M0 0 C14.8 2.2 30.4 5.2 43.4 11.3 C29.5 0.9 14.3 -0.9 0 0 Z" transform="translate(12.1 4.0) rotate(-35.7)"/>
+              <path d="M0 0 C13.9 2.0 28.6 4.9 40.8 10.6 C27.8 0.8 13.5 -0.8 0 0 Z" transform="translate(12.1 4.0) rotate(64.3)"/>
+              <path d="M0 0 C17.7 2.6 36.5 6.3 52.1 13.6 C35.5 1.0 17.2 -1.0 0 0 Z" transform="translate(24.4 8.0) rotate(-35.9)"/>
+              <path d="M0 0 C16.7 2.5 34.3 5.9 49.0 12.7 C33.3 1.0 16.2 -1.0 0 0 Z" transform="translate(24.4 8.0) rotate(64.1)"/>
+              <path d="M0 0 C19.9 2.9 41.1 7.0 58.7 15.3 C39.9 1.2 19.4 -1.2 0 0 Z" transform="translate(36.9 12.1) rotate(-36.1)"/>
+              <path d="M0 0 C18.8 2.8 38.6 6.6 55.2 14.3 C37.5 1.1 18.2 -1.1 0 0 Z" transform="translate(36.9 12.1) rotate(63.9)"/>
+              <path d="M0 0 C21.6 3.2 44.4 7.6 63.4 16.5 C43.1 1.3 20.9 -1.3 0 0 Z" transform="translate(49.5 16.2) rotate(-36.2)"/>
+              <path d="M0 0 C20.3 3.0 41.7 7.2 59.6 15.5 C40.5 1.2 19.7 -1.2 0 0 Z" transform="translate(49.5 16.2) rotate(63.8)"/>
+              <path d="M0 0 C22.6 3.3 46.4 8.0 66.4 17.3 C45.1 1.3 21.9 -1.3 0 0 Z" transform="translate(62.4 20.3) rotate(-36.4)"/>
+              <path d="M0 0 C21.2 3.1 43.7 7.5 62.4 16.2 C42.4 1.2 20.6 -1.2 0 0 Z" transform="translate(62.4 20.3) rotate(63.6)"/>
+              <path d="M0 0 C23.0 3.4 47.3 8.1 67.6 17.6 C45.9 1.4 22.3 -1.4 0 0 Z" transform="translate(75.4 24.4) rotate(-36.5)"/>
+              <path d="M0 0 C21.6 3.2 44.5 7.6 63.5 16.5 C43.2 1.3 21.0 -1.3 0 0 Z" transform="translate(75.4 24.4) rotate(63.5)"/>
+              <path d="M0 0 C22.8 3.4 46.9 8.0 67.0 17.4 C45.6 1.3 22.1 -1.3 0 0 Z" transform="translate(88.6 28.6) rotate(-36.6)"/>
+              <path d="M0 0 C21.4 3.2 44.1 7.6 63.0 16.4 C42.8 1.3 20.8 -1.3 0 0 Z" transform="translate(88.6 28.6) rotate(63.4)"/>
+              <path d="M0 0 C22.0 3.2 45.3 7.8 64.7 16.8 C44.0 1.3 21.4 -1.3 0 0 Z" transform="translate(102.1 32.8) rotate(-36.8)"/>
+              <path d="M0 0 C20.7 3.0 42.6 7.3 60.8 15.8 C41.4 1.2 20.1 -1.2 0 0 Z" transform="translate(102.1 32.8) rotate(63.2)"/>
+              <path d="M0 0 C20.6 3.0 42.5 7.3 60.7 15.8 C41.3 1.2 20.0 -1.2 0 0 Z" transform="translate(115.7 37.0) rotate(-36.9)"/>
+              <path d="M0 0 C19.4 2.9 39.9 6.8 57.0 14.8 C38.8 1.1 18.8 -1.1 0 0 Z" transform="translate(115.7 37.0) rotate(63.1)"/>
+              <path d="M0 0 C18.6 2.7 38.4 6.6 54.9 14.3 C37.3 1.1 18.1 -1.1 0 0 Z" transform="translate(129.5 41.2) rotate(-37.0)"/>
+              <path d="M0 0 C17.5 2.6 36.1 6.2 51.6 13.4 C35.1 1.0 17.0 -1.0 0 0 Z" transform="translate(129.5 41.2) rotate(63.0)"/>
+              <path d="M0 0 C16.0 2.4 32.9 5.6 47.1 12.2 C32.0 0.9 15.5 -0.9 0 0 Z" transform="translate(143.5 45.4) rotate(-37.2)"/>
+              <path d="M0 0 C15.0 2.2 31.0 5.3 44.2 11.5 C30.1 0.9 14.6 -0.9 0 0 Z" transform="translate(143.5 45.4) rotate(62.8)"/>
+              <path d="M0 0 C12.3 1.8 25.3 4.3 36.2 9.4 C24.6 0.7 11.9 -0.7 0 0 Z" transform="translate(157.6 49.7) rotate(-37.3)"/>
+              <path d="M0 0 C11.6 1.7 23.8 4.1 34.0 8.8 C23.1 0.7 11.2 -0.7 0 0 Z" transform="translate(157.6 49.7) rotate(62.7)"/>
+              <path d="M0 0 C9.7 1.4 20.0 3.4 28.6 7.4 C19.4 0.6 9.4 -0.6 0 0 Z" transform="translate(172.0 54.0) rotate(-37.4)"/>
+              <path d="M0 0 C9.1 1.3 18.8 3.2 26.9 7.0 C18.3 0.5 8.9 -0.5 0 0 Z" transform="translate(172.0 54.0) rotate(62.6)"/>
+              <path d="M0 0 C10.2 1.5 21.0 3.6 30.0 7.8 C20.4 0.6 9.9 -0.6 0 0 Z" transform="translate(172.0 54.0) rotate(-3.4)"/>
+              <path d="M0 0 C10.2 1.5 21.0 3.6 30.0 7.8 C20.4 0.6 9.9 -0.6 0 0 Z" transform="translate(172.0 54.0) rotate(9.6)"/>
+              <path d="M0 0 C10.2 1.5 21.0 3.6 30.0 7.8 C20.4 0.6 9.9 -0.6 0 0 Z" transform="translate(172.0 54.0) rotate(23.6)"/>
+              <path d="M0 0 C10.2 1.5 21.0 3.6 30.0 7.8 C20.4 0.6 9.9 -0.6 0 0 Z" transform="translate(172.0 54.0) rotate(36.6)"/>
+            </g>
+          </svg>
+
+          <span class="viewfinder__bracket viewfinder__bracket--tl" aria-hidden="true"></span>
+          <span class="viewfinder__bracket viewfinder__bracket--tr" aria-hidden="true"></span>
+          <span class="viewfinder__bracket viewfinder__bracket--bl" aria-hidden="true"></span>
+          <span class="viewfinder__bracket viewfinder__bracket--br" aria-hidden="true"></span>
+
+          <span class="viewfinder__copy">
+            <span class="viewfinder__title">Fotografías</span>
+            <span class="viewfinder__sub">Todo el archivo, en Lightroom.</span>
+            <span class="viewfinder__cta">Abrir la galería</span>
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .viewfinder {
+    --focus-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    display: block;
+    text-decoration: none;
+    border-radius: 8px;
+  }
+
+  /* marcos apilados detrás: el archivo continúa más allá de esta foto */
+  .viewfinder__stack {
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    border: 1px solid var(--paper-line);
+    background: var(--paper-raised);
+    transition: transform 700ms var(--focus-ease);
+  }
+  .viewfinder__stack--a { transform: translate(7px, 7px) rotate(0.5deg); }
+  .viewfinder__stack--b { transform: translate(14px, 14px) rotate(1.1deg); opacity: 0.55; }
+
+  .viewfinder__frame {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--paper-line);
+    min-height: clamp(20rem, 42vw, 31rem);
+    background: var(--home-bar);
+    box-shadow: 0 22px 48px -26px rgba(17, 36, 53, 0.55);
+  }
+
+  .viewfinder__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* reposo: fuera de foco. el hover hace el enfoque. */
+    object-position: 50% 45%;
+    filter: blur(2px) saturate(0.74) brightness(1.01);
+    transform: scale(1.05);
+    transition: filter 750ms var(--focus-ease), transform 750ms var(--focus-ease);
+  }
+
+  .viewfinder__scrim {
+    position: absolute;
+    inset: 0;
+    /* oscurece abajo-izquierda, donde va el texto; deja libre la laguna */
+    background:
+      linear-gradient(
+        to top,
+        rgba(10, 25, 38, 0.8) 0%,
+        rgba(10, 25, 38, 0.45) 30%,
+        rgba(10, 25, 38, 0.12) 62%,
+        rgba(10, 25, 38, 0) 100%
+      ),
+      linear-gradient(
+        to right,
+        rgba(10, 25, 38, 0.52) 0%,
+        rgba(10, 25, 38, 0.16) 46%,
+        rgba(10, 25, 38, 0) 72%
+      );
+  }
+
+  /* ============ sur de California: capas animadas ============ */
+
+  /* hojas de palmera en silueta, meciéndose con la brisa */
+  .vf-frond {
+    position: absolute;
+    width: clamp(9rem, 26vw, 17rem);
+    height: auto;
+    aspect-ratio: 210 / 130;
+    overflow: visible;
+    fill: #0a1926;
+    opacity: 0.72;
+    filter: blur(1.2px);
+  }
+  .vf-frond__rachis {
+    stroke: #0a1926;
+    stroke-width: 2.5;
+    fill: none;
+  }
+  .vf-frond__sway {
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+  .vf-frond--l { top: -4%; left: -3%; }
+  .vf-frond--l .vf-frond__sway { animation: vf-sway-l 9s ease-in-out infinite; }
+  @keyframes vf-sway-l {
+    0%, 100% { transform: translate(-6px, -14px) rotate(6deg); }
+    50%      { transform: translate(-6px, -14px) rotate(13deg); }
+  }
+
+  /* escuadras del visor: se cierran al enfocar */
+  .viewfinder__bracket {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 0 solid rgba(251, 252, 253, 0.85);
+    transition: transform 750ms var(--focus-ease);
+  }
+  .viewfinder__bracket--tl {
+    top: 20px; left: 20px;
+    border-top-width: 2px; border-left-width: 2px;
+    transform: translate(-7px, -7px);
+  }
+  .viewfinder__bracket--tr {
+    top: 20px; right: 20px;
+    border-top-width: 2px; border-right-width: 2px;
+    transform: translate(7px, -7px);
+  }
+  .viewfinder__bracket--bl {
+    bottom: 20px; left: 20px;
+    border-bottom-width: 2px; border-left-width: 2px;
+    transform: translate(-7px, 7px);
+  }
+  .viewfinder__bracket--br {
+    bottom: 20px; right: 20px;
+    border-bottom-width: 2px; border-right-width: 2px;
+    transform: translate(7px, 7px);
+  }
+
+  .viewfinder__copy {
+    position: absolute;
+    left: clamp(1.75rem, 4vw, 3.25rem);
+    right: clamp(1.75rem, 4vw, 3.25rem);
+    bottom: clamp(1.75rem, 4vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .viewfinder__title {
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.75rem, 7.5vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    color: #fbfcfd;
+  }
+
+  .viewfinder__sub {
+    margin-top: 0.6rem;
+    max-width: 32ch;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(251, 252, 253, 0.74);
+  }
+
+  .viewfinder__cta {
+    position: relative;
+    margin-top: 1.4rem;
+    font-size: 0.95rem;
+    color: var(--gold);
+  }
+  .viewfinder__cta::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms var(--focus-ease);
+  }
+
+  /* el enfoque: un solo gesto, disparado por la persona */
+  .viewfinder:hover .viewfinder__photo,
+  .viewfinder:focus-visible .viewfinder__photo {
+    filter: blur(0) saturate(1.08) brightness(1.02);
+    transform: scale(1);
+  }
+  .viewfinder:hover .viewfinder__bracket,
+  .viewfinder:focus-visible .viewfinder__bracket {
+    transform: translate(0, 0);
+  }
+  .viewfinder:hover .viewfinder__cta::after,
+  .viewfinder:focus-visible .viewfinder__cta::after {
+    transform: scaleX(1);
+  }
+
+  .viewfinder:focus-visible {
+    outline: 2px solid var(--river);
+    outline-offset: 5px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viewfinder__photo {
+      filter: saturate(1) brightness(1);
+      transform: scale(1);
+      transition: none;
+    }
+    .viewfinder__stack,
+    .viewfinder__bracket,
+    .viewfinder__cta::after {
+      transition: none;
+    }
+    .vf-frond__sway {
+      animation: none;
+    }
+    .viewfinder__bracket { transform: translate(0, 0); }
+    .viewfinder__cta::after { transform: scaleX(1); }
+  }
+</style>

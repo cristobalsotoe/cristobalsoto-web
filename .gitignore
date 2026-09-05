@@ -19,3 +19,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# fotos originales de cámara (224 MB) — versiones webp optimizadas sí se versionan
+public/img/_CAM*.jpg
