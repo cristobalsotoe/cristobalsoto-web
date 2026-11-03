@@ -14,19 +14,24 @@ category: "classic"
 
 ## Educación
 
+- **2026–presente** — *Doctorado (en curso)*, University of California, Irvine, Irvine, California, Estados Unidos. Becario Fulbright.
 - **2023** — *Diploma en Hidrología e Impactos del Cambio Climático*, Universidad Adolfo Ibáñez, Santiago, Chile — 16 créditos SCT.
 - **2014–2020** — *Ingeniería Civil*, Universidad de La Frontera, Temuco, Chile. Titulado con distinción máxima. Tesis: "Construction of High-Resolution Spatial Intensity-Duration-Frequency Curves in Central-Southern Chile".
 
 ## Experiencia profesional
 
-###### 2020 – Presente — Ingeniero Consultor, ICASS Spa
+###### 2026 – Presente — Investigador de posgrado, University of California, Irvine
+
+- Investigación doctoral en el Center for Hydrometeorology and Remote Sensing (CHRS).
+
+###### 2020 – 2026 — Ingeniero Consultor, ICASS SpA
 
 - Proyectos hidrológicos e hidráulicos con foco en el ciclo del agua y gestión integrada de recursos.
 - Planes Estratégicos de Gestión Hídrica (PEGH) con la Dirección General de Aguas (DGA), incluyendo cuenca del Maipo, cuencas costeras Maipo–Rapel, cuencas Lluta y Pampa, y cuenca Quebrada de la Concordia.
 - Diseño de redes de agua potable y apoyo a proyectos de agua potable rural.
 - Modelo MODFLOW para el Tranque de Relaves Barahona (Codelco, El Teniente).
 - Asesoría técnica a Minera Los Pelambres en gestión de recursos hídricos.
-- Liderazgo actual de modelamiento integrado en la cuenca del Maipo.
+- Liderazgo del modelamiento integrado en la cuenca del Maipo.
 
 ###### 2022 — Investigador Asociado, ANID Proyecto 11190864
 

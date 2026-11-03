@@ -124,7 +124,7 @@ const en: UIStrings = {
     aboutHtml: [
       "I'm a <b>civil engineer</b> specializing in <b>water resources</b>, and a researcher. My work focuses on the analysis of extreme precipitation events in a changing climate, the use of gridded data in hydrological studies, and integrated modeling of surface water and groundwater.",
       "I've worked on projects ranging from Strategic Water Management Plans with Chile's Dirección General de Aguas to the development of interactive web platforms and high-spatial-resolution Intensity-Duration-Frequency curves.",
-      "I started my PhD at UC Irvine in September 2026. Before that, I worked as a consulting engineer at ICASS Spa, leading integrated modeling efforts.",
+      "I started my PhD at UC Irvine in September 2026. Before that, I worked as a consulting engineer at ICASS SpA, leading integrated modeling efforts.",
     ],
     contactKicker: "Email, social and profiles",
     contactTitle: "Let's talk",
@@ -215,7 +215,7 @@ const es: UIStrings = {
     aboutHtml: [
       "Soy <b>ingeniero civil</b>, especialista en <b>recursos hídricos</b> e investigador. Mi trabajo se centra en el análisis de eventos de precipitación extrema en un clima cambiante, el uso de datos grillados en estudios hidrológicos, y el modelamiento integrado de aguas superficiales y subterráneas.",
       "He participado en proyectos que van desde Planes Estratégicos de Gestión Hídrica con la Dirección General de Aguas de Chile hasta el desarrollo de plataformas web interactivas y curvas de Intensidad-Duración-Frecuencia de alta resolución espacial.",
-      "Comencé mi doctorado en UC Irvine en septiembre de 2026. Antes trabajé como ingeniero consultor en ICASS Spa, liderando esfuerzos de modelamiento integrado.",
+      "Comencé mi doctorado en UC Irvine en septiembre de 2026. Antes trabajé como ingeniero consultor en ICASS SpA, liderando esfuerzos de modelamiento integrado.",
     ],
     contactKicker: "Correo, redes y perfiles",
     contactTitle: "Conversemos",

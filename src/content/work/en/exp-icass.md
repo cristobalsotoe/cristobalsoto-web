@@ -1,9 +1,9 @@
 ---
-company: "ICASS Spa"
+company: "ICASS SpA"
 role: "Consulting Engineer"
 location: "Chile"
-dateStart: "01/01/2020"
-dateEnd: "Present"
+dateStart: "08/01/2020"
+dateEnd: "07/31/2026"
 category: "experience"
 highlights:
   - "Hydrological and hydraulic projects focused on the water cycle and integrated resource management."

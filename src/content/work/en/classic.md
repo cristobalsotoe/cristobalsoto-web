@@ -14,19 +14,24 @@ category: "classic"
 
 ## Education
 
+- **2026–present** — *PhD (in progress)*, University of California, Irvine, Irvine, California, United States. Fulbright Scholar.
 - **2023** — *Diploma in Hydrology and Climate Change Impacts*, Universidad Adolfo Ibáñez, Santiago, Chile — 16 SCT credits.
 - **2014–2020** — *Civil Engineering*, Universidad de La Frontera, Temuco, Chile. Graduated with highest distinction. Thesis: "Construction of High-Resolution Spatial Intensity-Duration-Frequency Curves in Central-Southern Chile".
 
 ## Professional experience
 
-###### 2020 – Present — Consulting Engineer, ICASS Spa
+###### 2026 – Present — Graduate Student Researcher, University of California, Irvine
+
+- PhD research at the Center for Hydrometeorology and Remote Sensing (CHRS).
+
+###### 2020 – 2026 — Consulting Engineer, ICASS SpA
 
 - Hydrological and hydraulic projects focused on the water cycle and integrated resource management.
 - Strategic Water Management Plans (PEGH) with the Dirección General de Aguas (DGA), including the Maipo basin, the Maipo–Rapel coastal basins, the Lluta and Pampa basins, and the Quebrada de la Concordia basin.
 - Design of drinking water networks and support for rural drinking water projects.
 - MODFLOW model for the Barahona Tailings Dam (Codelco, El Teniente).
 - Technical advisory to Minera Los Pelambres on water resources management.
-- Currently leading integrated modeling in the Maipo basin.
+- Led integrated modeling in the Maipo basin.
 
 ###### 2022 — Associate Researcher, ANID Project 11190864
 

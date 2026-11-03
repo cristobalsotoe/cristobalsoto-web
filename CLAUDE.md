@@ -1,6 +1,6 @@
 # cristobalsoto.com
 
-Sitio personal de Cristóbal Soto (hidrólogo; PhD entrante en UC Irvine, sept. 2026). Construido con **Astro** + **Markdown/MDX** para el blog, desplegado en **GitHub Pages** con dominio custom.
+Sitio personal de Cristóbal Soto (hidrólogo; doctorando en UC Irvine desde sept. 2026). Construido con **Astro** + **Markdown/MDX** para el blog, desplegado en **GitHub Pages** con dominio custom.
 
 ## Stack
 

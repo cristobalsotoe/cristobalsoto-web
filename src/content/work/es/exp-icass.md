@@ -1,9 +1,9 @@
 ---
-company: "ICASS Spa"
+company: "ICASS SpA"
 role: "Ingeniero Consultor"
 location: "Chile"
-dateStart: "01/01/2020"
-dateEnd: "Present"
+dateStart: "08/01/2020"
+dateEnd: "07/31/2026"
 category: "experience"
 highlights:
   - "Proyectos hidrológicos e hidráulicos con foco en el ciclo del agua y gestión integrada de recursos."
