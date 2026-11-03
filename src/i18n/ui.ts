@@ -80,8 +80,8 @@ export type UIStrings = {
     next: string
   }
   notCv: { title: string; intro: string; photosTitle: string; photosSub: string; photosCta: string }
-  /** results usa {n} y {q} */
-  search: { placeholder: string; results: string }
+  /** resultsOne/resultsMany usan {n} y {q}; se eligen con searchSummary (format.ts) */
+  search: { placeholder: string; resultsOne: string; resultsMany: string }
 }
 
 const en: UIStrings = {
@@ -170,7 +170,8 @@ const en: UIStrings = {
   },
   search: {
     placeholder: "What are you looking for?",
-    results: "Found {n} results for '{q}'",
+    resultsOne: "Found {n} result for '{q}'",
+    resultsMany: "Found {n} results for '{q}'",
   },
 }
 
@@ -260,7 +261,8 @@ const es: UIStrings = {
   },
   search: {
     placeholder: "¿Qué estás buscando?",
-    results: "{n} resultados para '{q}'",
+    resultsOne: "{n} resultado para '{q}'",
+    resultsMany: "{n} resultados para '{q}'",
   },
 }
 

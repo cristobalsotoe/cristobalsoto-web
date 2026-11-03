@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { duration, formatDate, longDate, monthYear, readingTime } from "./format"
+import { duration, formatDate, longDate, monthYear, readingTime, searchSummary } from "./format"
 
 // fechas construidas en hora local para no depender de la zona horaria
 const d = new Date(2026, 6, 12)
@@ -45,5 +45,19 @@ describe("duration", () => {
 
   it("measures 'Present' against the given date", () => {
     expect(duration("2020-01-01", "Present", "en", new Date("2021-01-01"))).toBe("1 year")
+  })
+})
+
+describe("searchSummary", () => {
+  it("uses the singular for exactly one result", () => {
+    expect(searchSummary(1, "storm", "en")).toBe("Found 1 result for 'storm'")
+    expect(searchSummary(1, "temporal", "es")).toBe("1 resultado para 'temporal'")
+  })
+  it("uses the plural otherwise", () => {
+    expect(searchSummary(3, "storm", "en")).toBe("Found 3 results for 'storm'")
+    expect(searchSummary(2, "temporal", "es")).toBe("2 resultados para 'temporal'")
+  })
+  it("shows the query literally, even with $ replacement patterns", () => {
+    expect(searchSummary(2, "a$&b$1", "en")).toBe("Found 2 results for 'a$&b$1'")
   })
 })

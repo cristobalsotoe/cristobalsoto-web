@@ -12,6 +12,7 @@ const SITE = "https://cristobalsoto.com"
 const EN_ONLY = ["/legal/", "/projects/"]
 const ASSET = /^\/(img|fonts|js|doc|_astro)\/|\.svg$|^\/sitemap/
 const ES = /^\/es(\/|$)/
+const OG_LOCALE = { en: "en_US", es: "es_CL" } // igual que OG_LOCALE en src/i18n/config.ts
 
 const dist = process.argv[2] ?? "dist"
 
@@ -49,6 +50,8 @@ for (const [route, html] of pages) {
   const lang = isEs(route) ? "es" : "en"
   const htmlLang = html.match(/<html\b[^>]*\blang="([^"]*)"/)?.[1]
   if (htmlLang !== lang) fail(route, `<html lang="${htmlLang}"> (esperado "${lang}")`)
+  const ogLocale = tags(html, "meta").map(attrs).find((m) => m.property === "og:locale")?.content
+  if (ogLocale !== OG_LOCALE[lang]) fail(route, `og:locale="${ogLocale}" (esperado "${OG_LOCALE[lang]}")`)
 
   const anchors = tags(html, "a").map(attrs)
   const toggles = anchors.filter((a) => "data-lang-toggle" in a)
@@ -88,6 +91,8 @@ for (const [route, html] of pages) {
     if (lang === "en" && isEs(path)) fail(route, `link a página en español: ${href}`)
   }
 }
+
+if (!pairs) errors.push(`✗ ${dist}/: no hay pares EN/ES (¿el build no generó páginas?)`)
 
 if (errors.length) {
   console.error(errors.join("\n"))

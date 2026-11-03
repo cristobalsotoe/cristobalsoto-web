@@ -1,4 +1,5 @@
 import { DATE_LOCALE, type Lang } from "./config"
+import { ui } from "./ui"
 
 const UNITS: Record<Lang, { month: [string, string]; year: [string, string]; read: string }> = {
   en: { month: ["month", "months"], year: ["year", "years"], read: "min read" },
@@ -32,4 +33,10 @@ export function duration(startIso: string, endIso: string | "Present", lang: Lan
   const months = Math.max(1, Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 30.4)))
   if (months < 12) return plural(months, UNITS[lang].month)
   return plural(Math.round(months / 12), UNITS[lang].year)
+}
+
+/** "Found 1 result for 'x'" / "3 resultados para 'x'"; la consulta se inserta tal cual. */
+export function searchSummary(count: number, query: string, lang: Lang): string {
+  const t = ui[lang].search
+  return (count === 1 ? t.resultsOne : t.resultsMany).replace("{n}", String(count)).replace("{q}", () => query)
 }

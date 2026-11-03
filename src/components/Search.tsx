@@ -4,6 +4,7 @@ import Fuse from "fuse.js"
 import ArrowCard from "@components/ArrowCard"
 import SearchBar from "@components/SearchBar"
 import type { Lang } from "@i18n/config"
+import { searchSummary } from "@i18n/format"
 import { ui } from "@i18n/ui"
 
 type Props = {
@@ -43,7 +44,7 @@ export default function Search({ data, lang }: Props) {
       {(query().length >= 2 && results().length >= 1) && (
         <div class="mt-12">
           <div class="text-sm uppercase mb-2">
-            {t.results.replace("{n}", String(results().length)).replace("{q}", query())}
+            {searchSummary(results().length, query(), lang)}
           </div>
           <ul class="flex flex-col gap-3">
             {results().map(result => (
