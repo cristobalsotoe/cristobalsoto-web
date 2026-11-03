@@ -3,8 +3,7 @@ title: "New Publication: Developing IDF curves using sub-daily gridded and in si
 summary: "We address the critical challenge of estimating precipitation extremes in data-scarce regions in our latest article about Intensity, Duration and Frequency curves in Chile."
 date: "Jan 17 2026"
 draft: false
-lang: "en"
-source: "Nota de campo"
+source: "Field note"
 image: "/img/idf-plataforma-preview.webp"
 tags:
 - Hydrology
@@ -31,8 +30,8 @@ These results underscore the need for high-resolution spatial data in hydrologic
 * 🌐 **Explore the platform:** [curvasIDF.cl](https://curvasIDF.cl/)
 * 📄 **Read the full article:** [Link to Paper](https://lnkd.in/dyc5DSSa)
 
-<img src="/img/IDF_Plataforma-navegador.png" alt="Vista de la plataforma web de curvas IDF" class="w-1/1 mx-auto rounded-lg shadow-md" />
-<img src="/img/IDF_Plataforma-phone.png" alt="Vista de la plataforma mobile de curvas IDF" class="w-1/2 mx-auto rounded-lg shadow-md" />
+<img src="/img/IDF_Plataforma-navegador.png" alt="View of the IDF curves web platform" class="w-1/1 mx-auto rounded-lg shadow-md" />
+<img src="/img/IDF_Plataforma-phone.png" alt="View of the IDF curves mobile platform" class="w-1/2 mx-auto rounded-lg shadow-md" />
 
 **Authors:** Cristóbal Soto-Escobar, Mauricio Zambrano-Bigiarini, Violeta Tolorza and René Garreaud. 
 

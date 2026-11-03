@@ -3,7 +3,6 @@ title: "¿Qué tan extremo fue el temporal de inicios de julio en el sur de Chil
 summary: "Analizamos el periodo de retorno de las lluvias del 6 al 9 de julio en el sur de Chile: qué tan inusual fue el evento y qué implica para el diseño de infraestructura."
 date: "Jul 12 2026"
 draft: false
-lang: "es"
 source: "Nota de campo"
 image: "/img/map_periodo_retorno_histograma_inset_osm.png"
 tags:

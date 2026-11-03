@@ -1,11 +1,12 @@
 ---
-import { getCollection } from "astro:content"
+import { getLocalized } from "@i18n/content"
+import { postPath } from "@i18n/slugs"
 import PageLayout from "@layouts/PageLayout.astro"
 import Landscape3D from "@components/Landscape3D"
 import { SITE, SOCIALS } from "@consts"
 import { formatDate } from "@i18n/format"
 
-const posts = (await getCollection("blog"))
+const posts = (await getLocalized("blog", "en"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 
@@ -103,7 +104,7 @@ const latest = posts[0]
             <span class="kicker">Lo más reciente</span>
             <a href="/blog" class="news-headline text-lg hover:underline underline-offset-4">El Pluviómetro</a>
           </div>
-          <a href={`/blog/${latest.slug}`} class="news-link group grid md:grid-cols-[1fr_13rem] gap-6 items-start">
+          <a href={postPath(latest.slug)} class="news-link group grid md:grid-cols-[1fr_13rem] gap-6 items-start">
             <div>
               <p class="kicker mb-2">{latest.data.source ?? "Nota"}</p>
               <h2 class="news-headline text-3xl md:text-4xl transition-colors duration-300">

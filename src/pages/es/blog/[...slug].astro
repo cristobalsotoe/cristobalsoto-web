@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from "astro:content"
+import BlogPostView from "@views/BlogPostView.astro"
+import { getLocalized } from "@i18n/content"
+import { baseSlug } from "@i18n/slugs"
+
+export async function getStaticPaths() {
+  const posts = await getLocalized("blog", "es")
+  return posts.map((post) => ({ params: { slug: baseSlug(post.slug) }, props: { post } }))
+}
+
+type Props = { post: CollectionEntry<"blog"> }
+const { post } = Astro.props
+---
+
+<BlogPostView lang="es" post={post} />
