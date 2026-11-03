@@ -21,7 +21,7 @@ const project = Astro.props
 const { title, summary } = project.data
 ---
 
-<PageLayout title={title} description={summary}>
+<PageLayout title={title} description={summary} lang="en" hasTwin={false}>
   <TopLayout>
     <div class="animate">
       <ArticleTopLayout entry={project} />

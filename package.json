@@ -12,7 +12,8 @@
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "vitest run"
+    "test": "vitest run",
+    "check:i18n": "node scripts/check-i18n.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.6",

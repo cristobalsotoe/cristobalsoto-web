@@ -1,0 +1,32 @@
+---
+import { otherLang, type Lang } from "@i18n/config"
+import { twinPath } from "@i18n/paths"
+import { ui } from "@i18n/ui"
+import { cn } from "@lib/utils"
+
+interface Props {
+  lang: Lang
+  class?: string
+}
+
+const { lang, class: className } = Astro.props
+const target = otherLang(lang)
+---
+
+<a
+  href={twinPath(Astro.url.pathname)}
+  hreflang={target}
+  lang={target}
+  aria-label={ui[target].switchTo}
+  data-lang-toggle
+  class={cn(
+    "label h-9 px-3 rounded-full flex items-center gap-1.5",
+    "bg-transparent hover:bg-paper-raised border border-mist",
+    "transition-colors duration-300 ease-in-out",
+    className,
+  )}
+>
+  <span class={lang === "en" ? "text-ink" : "text-ink-faint"}>EN</span>
+  <span aria-hidden="true" class="text-ink-faint">|</span>
+  <span class={lang === "es" ? "text-ink" : "text-ink-faint"}>ES</span>
+</a>

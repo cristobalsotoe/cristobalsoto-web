@@ -1,13 +1,21 @@
 ---
+import { OG_LOCALE, type Lang } from "@i18n/config"
+import { localizePath } from "@i18n/paths"
+import { ui } from "@i18n/ui"
+
 interface Props {
   title: string
   description: string
+  lang: Lang
+  hasTwin: boolean
   image?: string
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const { pathname } = Astro.url
+const canonicalURL = new URL(pathname, Astro.site)
+const alternate = (lang: Lang) => new URL(localizePath(pathname, lang), Astro.site)
 
-const { title, description, image = "/open-graph.jpg" } = Astro.props
+const { title, description, lang, hasTwin, image = "/open-graph.jpg" } = Astro.props
 ---
 
 <!-- Global Metadata -->
@@ -22,6 +30,15 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
+<!-- Versiones por idioma -->
+{hasTwin && (
+  <>
+    <link rel="alternate" hreflang="en" href={alternate("en")} />
+    <link rel="alternate" hreflang="es" href={alternate("es")} />
+    <link rel="alternate" hreflang="x-default" href={alternate("en")} />
+  </>
+)}
+
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
@@ -29,6 +46,7 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
+<meta property="og:locale" content={OG_LOCALE[lang]} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -45,7 +63,7 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- RSS Feed -->
-<link rel="alternate" type="application/rss+xml" title={title} href={`${Astro.site}rss.xml`}/>
+<link rel="alternate" type="application/rss+xml" title={ui[lang].meta.rssTitle} href={new URL(localizePath("/rss.xml", lang), Astro.site)}/>
 
 <!-- Global Scripts -->
 <script is:inline src="/js/theme.js"></script>

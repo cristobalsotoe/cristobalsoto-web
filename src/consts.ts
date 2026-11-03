@@ -40,23 +40,23 @@ export const SEARCH: Page = {
 // Links
 export const LINKS: Links = [
   {
-    TEXT: "Home",
+    KEY: "home",
     HREF: "/",
   },
   {
-    TEXT: "CV",
+    KEY: "cv",
     HREF: "/work",
   },
   {
-    TEXT: "Blog",
+    KEY: "blog",
     HREF: "/blog",
   },
   {
-    TEXT: "Not CV",
+    KEY: "notCv",
     HREF: "/not-cv",
   },
   {
-    TEXT: "IDF Curves",
+    KEY: "idf",
     HREF: "https://curvasidf.cl/",
   },
 ]

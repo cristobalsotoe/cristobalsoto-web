@@ -4,21 +4,31 @@ import BaseHead from "@components/BaseHead.astro"
 import Header from "@components/Header.astro"
 import Footer from "@components/Footer.astro"
 import Drawer from "@components/Drawer.astro"
-const { title, description, lang = "en" } = Astro.props
 import { SITE } from "@consts"
+import type { Lang } from "@i18n/config"
+
+interface Props {
+  title: string
+  description: string
+  lang: Lang
+  /** false en páginas que solo existen en inglés (legal, projects) */
+  hasTwin?: boolean
+}
+
+const { title, description, lang, hasTwin = true } = Astro.props
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
+    <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} lang={lang} hasTwin={hasTwin} />
   </head>
   <body>
-    <Header />
-    <Drawer />
+    <Header lang={lang} hasTwin={hasTwin} />
+    <Drawer lang={lang} hasTwin={hasTwin} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

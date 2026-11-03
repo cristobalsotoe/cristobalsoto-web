@@ -1,3 +1,5 @@
+import type { UIStrings } from "./i18n/ui"
+
 export type Page = {
   TITLE: string
   DESCRIPTION: string
@@ -8,7 +10,7 @@ export interface Site extends Page {
 }
 
 export type Links = {
-  TEXT: string
+  KEY: keyof UIStrings["nav"]
   HREF: string
 }[]
 
