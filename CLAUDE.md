@@ -1,4 +1,4 @@
-# cristobalsoto.cl
+# cristobalsoto.com
 
 Sitio personal de Cristóbal Soto (hidrólogo; PhD entrante en UC Irvine, sept. 2026). Construido con **Astro** + **Markdown/MDX** para el blog, desplegado en **GitHub Pages** con dominio custom.
 
@@ -10,7 +10,8 @@ Sitio personal de Cristóbal Soto (hidrólogo; PhD entrante en UC Irvine, sept. 
 - Contenido: `src/content/` con colecciones `blog`, `work`, `projects`, `legal` (schema en `src/content/config.ts`)
 - Búsqueda: fuse.js (`src/components/Search.tsx`, `SearchCollection.tsx`)
 - Build: `npm run build` corre `astro check && astro build` — un error de tipos o de contenido rompe el deploy completo
-- Deploy: push a `master` → `.github/workflows/deploy.yml` → GitHub Pages. Dominio en `public/CNAME`.
+- Deploy: push a `master` → `.github/workflows/deploy.yml` → GitHub Pages. Dominio principal `cristobalsoto.com` (en `public/CNAME`, `site` de `astro.config.mjs` y la config de Pages del repo). DNS de ambos dominios en Namecheap; nic.cl solo delega nameservers.
+- `cristobalsoto.cl` es un espejo: lo sirve el repo aparte `cristobalsotoe/cristobalsoto-cl` (páginas estáticas que redirigen a la misma ruta en el .com). Si se agregan rutas nuevas importantes, sumar su stub allí; el `404.html` cubre el resto vía JS.
 
 ## Estructura
 
@@ -51,7 +52,6 @@ Pendiente no bloqueante: destino de `/projects` (vacío, fuera de la nav), migra
 
 - Metadata de plantilla sin reemplazar en `src/consts.ts` (`AUTHOR`, `DESCRIPTION` siguen siendo los del theme original "Astro Sphere").
 - `/projects` y el índice de búsqueda incluyen proyectos "lorem ipsum" del template — no son contenido real.
-- Inconsistencia `www` vs apex entre `public/CNAME` y `site` en `astro.config.mjs`.
 - CV: `public/doc/2025_CV_Cristobal_Soto_EN.pdf` (mayo 2025) y `src/content/work/cv.md` (feb 2026) están desalineados en fecha — es intencional (PDF es descarga estática, `cv.md` es la fuente de lo que se muestra en la página), pero conviene actualizar el PDF cuando el contenido cambie de forma relevante.
 - Imágenes en `public/img/` sin optimizar (varias de 3–6 MB), aunque `sharp` ya está instalado y `astro:assets` no se usa.
 - `ViewTransitions` importado pero comentado en `BaseHead.astro`, con listeners de `astro:after-swap`/`astro:before-swap` huérfanos — código a limpiar o completar, no dejar a medias.
