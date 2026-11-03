@@ -1,9 +1,16 @@
 import { onMount, onCleanup, createSignal, Show } from "solid-js"
 import * as THREE from "three"
+import type { Lang } from "@i18n/config"
+import { ui } from "@i18n/ui"
 
 const keys = { forward: false, back: false, left: false, right: false }
 
-export default function Landscape3D() {
+type Props = {
+  lang: Lang
+}
+
+export default function Landscape3D(props: Props) {
+  const t = ui[props.lang].diorama
   let canvasRef: HTMLCanvasElement | undefined
   let containerRef: HTMLDivElement | undefined
   const [showHint, setShowHint] = createSignal(true)
@@ -551,32 +558,32 @@ export default function Landscape3D() {
   return (
     <div ref={containerRef} class="relative w-full h-full overflow-hidden">
       <Show when={supported()}>
-        <canvas ref={canvasRef} class="w-full h-full block" aria-label="Diorama 3D interactivo: maneja un auto por una isla entre Temuco e Irvine" role="img" tabindex="0" />
+        <canvas ref={canvasRef} class="w-full h-full block" aria-label={t.canvasAria} role="img" tabindex="0" />
 
         <Show when={showHint()}>
           <div class="absolute bottom-4 right-4 label px-3 py-1.5 rounded-full pointer-events-none" style="background: color-mix(in srgb, var(--ink) 80%, transparent); color: var(--paper);">
-            flechas o WASD para manejar
+            {t.hint}
           </div>
         </Show>
 
         <div class="sr-only">
-          Diorama del viaje de Temuco, Chile, a Irvine, California, donde curso mi doctorado en UC Irvine.
+          {t.srText}
         </div>
 
         <div class="md:hidden absolute bottom-4 right-4 grid grid-cols-3 grid-rows-2 gap-1.5 w-32 select-none">
           <div />
-          <button aria-label="Adelante" class="rounded-lg label py-2" style="background: color-mix(in srgb, var(--ink) 65%, transparent); color: var(--paper);" onPointerDown={press("forward")} onPointerUp={release("forward")} onPointerLeave={release("forward")}>&#9650;</button>
+          <button aria-label={t.forward} class="rounded-lg label py-2" style="background: color-mix(in srgb, var(--ink) 65%, transparent); color: var(--paper);" onPointerDown={press("forward")} onPointerUp={release("forward")} onPointerLeave={release("forward")}>&#9650;</button>
           <div />
-          <button aria-label="Izquierda" class="rounded-lg label py-2" style="background: color-mix(in srgb, var(--ink) 65%, transparent); color: var(--paper);" onPointerDown={press("left")} onPointerUp={release("left")} onPointerLeave={release("left")}>&#9664;</button>
-          <button aria-label="Atrás" class="rounded-lg label py-2" style="background: color-mix(in srgb, var(--ink) 65%, transparent); color: var(--paper);" onPointerDown={press("back")} onPointerUp={release("back")} onPointerLeave={release("back")}>&#9660;</button>
-          <button aria-label="Derecha" class="rounded-lg label py-2" style="background: color-mix(in srgb, var(--ink) 65%, transparent); color: var(--paper);" onPointerDown={press("right")} onPointerUp={release("right")} onPointerLeave={release("right")}>&#9654;</button>
+          <button aria-label={t.left} class="rounded-lg label py-2" style="background: color-mix(in srgb, var(--ink) 65%, transparent); color: var(--paper);" onPointerDown={press("left")} onPointerUp={release("left")} onPointerLeave={release("left")}>&#9664;</button>
+          <button aria-label={t.back} class="rounded-lg label py-2" style="background: color-mix(in srgb, var(--ink) 65%, transparent); color: var(--paper);" onPointerDown={press("back")} onPointerUp={release("back")} onPointerLeave={release("back")}>&#9660;</button>
+          <button aria-label={t.right} class="rounded-lg label py-2" style="background: color-mix(in srgb, var(--ink) 65%, transparent); color: var(--paper);" onPointerDown={press("right")} onPointerUp={release("right")} onPointerLeave={release("right")}>&#9654;</button>
         </div>
       </Show>
 
       <Show when={!supported()}>
         <div class="w-full h-full flex items-center justify-center px-8" style="background: linear-gradient(180deg, var(--paper) 0%, var(--paper-raised) 100%);">
           <p class="serif italic text-2xl md:text-4xl text-center max-w-lg" style="color: var(--ink);">
-            De Temuco a Irvine — cursando mi PhD en UC Irvine.
+            {t.fallback}
           </p>
         </div>
       </Show>

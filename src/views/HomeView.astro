@@ -1,0 +1,172 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import Landscape3D from "@components/Landscape3D"
+import { SOCIALS } from "@consts"
+import type { Lang } from "@i18n/config"
+import { getLocalized } from "@i18n/content"
+import { formatDate } from "@i18n/format"
+import { localizePath } from "@i18n/paths"
+import { postPath } from "@i18n/slugs"
+import { ui } from "@i18n/ui"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = ui[lang]
+
+const posts = (await getLocalized("blog", lang))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+const latest = posts[0]
+---
+
+<PageLayout title={t.meta.homeTitle} description={t.meta.siteDescription} lang={lang}>
+
+  <!-- HERO: diorama 3D al 100%, texto a la izquierda, foto como capa superior a la derecha -->
+  <section class="relative pt-20 pb-6 px-3 md:px-6" style="background:
+    radial-gradient(60rem 30rem at 85% -5%, color-mix(in srgb, var(--home-bg-2) 70%, transparent), transparent 60%),
+    radial-gradient(50rem 28rem at 0% 110%, color-mix(in srgb, var(--home-bg-2) 55%, transparent), transparent 60%),
+    var(--home-bg);">
+
+    <div class="relative mx-auto max-w-screen-xl rounded-3xl overflow-hidden border shadow-[0_18px_50px_-24px_rgba(19,49,58,0.35)]"
+         style="border-color: color-mix(in srgb, var(--home-bar) 22%, var(--home-bg-2)); height: min(80vh, 46rem); background:
+         linear-gradient(180deg, var(--home-bg-2) 0%, color-mix(in srgb, var(--home-bg-2) 45%, var(--home-bg)) 100%);">
+
+      <!-- capa 1: diorama interactivo, 100% del marco -->
+      <div class="absolute inset-0">
+        <Landscape3D client:load lang={lang} />
+      </div>
+
+      <!-- capa 2: contenido principal, 50% izquierdo -->
+      <div class="absolute inset-y-0 left-0 w-full md:w-[48%] flex items-end md:items-center pointer-events-none"
+           style="background: linear-gradient(90deg, color-mix(in srgb, var(--home-bg) 88%, transparent) 0%, color-mix(in srgb, var(--home-bg) 62%, transparent) 62%, transparent 100%);">
+        <div class="p-7 md:p-12 max-w-lg">
+          <p class="label mb-3">{t.home.role}</p>
+          <h1 class="serif italic text-5xl md:text-6xl lg:text-7xl leading-[0.95]" style="color: var(--ink);">
+            Cristóbal<br/>Soto-Escobar
+          </h1>
+          <p class="mt-5 text-base md:text-lg max-w-sm" style="color: var(--ink-soft);">
+            {t.home.tagline}
+          </p>
+          <p class="mt-2 text-sm max-w-sm" style="color: var(--ink-faint);">
+            {t.home.dioramaNote}
+          </p>
+          <div class="flex flex-wrap gap-3 mt-6 pointer-events-auto">
+            <a href={localizePath("/work", lang)} class="label px-4 py-2 rounded-full transition-colors" style="background: var(--home-bar); color: var(--home-bar-ink);">
+              {t.home.ctaCv}
+            </a>
+            <a href={localizePath("/blog", lang)} class="label px-4 py-2 rounded-full border transition-colors hover:bg-paper-raised" style="border-color: var(--ink-faint); color: var(--ink);">
+              {t.home.ctaBlog}
+            </a>
+          </div>
+          <div class="flex flex-wrap gap-4 mt-6 pointer-events-auto" style="color: var(--ink-faint);">
+            <a href="mailto:cristobal.soto.9@gmail.com" class="hover:text-river-deep transition-colors" title={t.home.emailTitle} aria-label="Email">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+            <a href="https://orcid.org/0009-0005-3867-6991" target="_blank" rel="noopener noreferrer" class="hover:text-river-deep transition-colors" title={t.home.orcidTitle} aria-label="ORCID">
+              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="20" height="20"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/csoto24/" target="_blank" rel="noopener noreferrer" class="hover:text-river-deep transition-colors" title="LinkedIn" aria-label="LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/cristobalsotoescobar" target="_blank" rel="noopener noreferrer" class="hover:text-river-deep transition-colors" title="GitHub" aria-label="GitHub">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.5-1.4 6.5-7a4.6 4.6 0 0 0-1.39-3.23 4.2 4.2 0 0 0-.1-3.2s-1.1-.35-3.5 1.25a11.39 11.39 0 0 0-7 0C6.2 1.6 5.1 2 5.1 2a4.2 4.2 0 0 0-.1 3.23A4.6 4.6 0 0 0 3.6 8.5c0 5.6 3.35 6.6 6.5 7a4.8 4.8 0 0 0-1 3.02V22"/><path d="M9 20c-5 1.5-5-2.5-7-3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- capa 3: foto de perfil, capa superior del lado derecho -->
+      <div class="hidden md:block absolute top-8 right-8 lg:top-10 lg:right-12 pointer-events-none">
+        <div class="relative">
+          <img
+            src="/img/foto de perfil.jpeg"
+            alt="Cristóbal Soto-Escobar"
+            class="size-36 lg:size-44 object-cover rounded-full ring-4 shadow-[0_10px_30px_-12px_rgba(19,49,58,0.45)]"
+            style="--tw-ring-color: var(--home-bg);"
+          />
+          <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 label whitespace-nowrap px-2.5 py-1 rounded-full" style="background: var(--home-bar); color: var(--home-bar-ink); font-size: 0.6rem;">
+            {t.home.photoBadge}
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div style="background: var(--home-bg);">
+
+  <!-- foto en móvil (la capa superior no cabe) -->
+  <div class="md:hidden flex justify-center pt-4 -mb-6">
+    <img src="/img/foto de perfil.jpeg" alt="Cristóbal Soto-Escobar" class="size-28 object-cover rounded-full ring-4" style="--tw-ring-color: var(--home-bg-2);" />
+  </div>
+
+  <div class="mx-auto max-w-screen-md px-5 space-y-16 py-16">
+
+    {latest && (
+      <!-- Lo más reciente: recorte de "El Pluviómetro", con el mismo lenguaje del blog -->
+      <section class="ident-blog border rounded-sm shadow-[0_14px_36px_-22px_rgba(17,36,53,0.4)]" style="border-color: var(--news-line);">
+        <div class="p-6 md:p-8">
+          <div class="flex items-baseline justify-between gap-4 pb-4 mb-6" style="border-bottom: 3px double var(--news-line);">
+            <span class="kicker">{t.home.latestKicker}</span>
+            <a href={localizePath("/blog", lang)} class="news-headline text-lg hover:underline underline-offset-4">El Pluviómetro</a>
+          </div>
+          <a href={postPath(latest.slug)} class="news-link group grid md:grid-cols-[1fr_13rem] gap-6 items-start">
+            <div>
+              <p class="kicker mb-2">{latest.data.source ?? t.blog.noteFallback}</p>
+              <h2 class="news-headline text-3xl md:text-4xl transition-colors duration-300">
+                {latest.data.title}
+              </h2>
+              <p class="mt-3 leading-relaxed" style="color: var(--news-gray);">
+                {latest.data.summary}
+              </p>
+              <div class="flex flex-wrap gap-x-4 mt-4 font-mono text-[0.62rem] uppercase tracking-[0.14em]" style="color: var(--news-faint);">
+                <span>{formatDate(latest.data.date, lang)}</span>
+                <span>{t.home.readArticle} &#8594;</span>
+              </div>
+            </div>
+            {latest.data.image && (
+              <img src={latest.data.image} alt="" class="w-full border" style="border-color: var(--news-line);" loading="lazy" />
+            )}
+          </a>
+        </div>
+      </section>
+    )}
+
+    <!-- Acerca de mí -->
+    <section class="pt-14 border-t" style="border-color: color-mix(in srgb, var(--home-bar) 18%, var(--home-bg-2));">
+      <p class="label mb-2">{t.home.aboutKicker}</p>
+      <h2 class="serif italic text-3xl md:text-4xl mb-6" style="color: var(--ink);">{t.home.aboutTitle}</h2>
+      <article class="about prose max-w-none" style="color: var(--ink-soft);">
+        {t.home.aboutHtml.map((html) => <p set:html={html} />)}
+      </article>
+    </section>
+
+    <!-- Conversemos -->
+    <section class="rounded-2xl p-7 md:p-9" style="background: var(--home-bg-2); border: 1px solid color-mix(in srgb, var(--home-bar) 18%, var(--home-bg-2));">
+      <p class="label mb-2">{t.home.contactKicker}</p>
+      <h2 class="serif italic text-3xl md:text-4xl mb-6" style="color: var(--ink);">{t.home.contactTitle}</h2>
+      <div class="grid grid-cols-[6rem_1fr] gap-y-2.5" style="color: var(--ink-soft);">
+        {SOCIALS.map((social) => (
+          <>
+            <span class="text-sm">{social.NAME}</span>
+            <a href={social.HREF} target="_blank" rel="noopener noreferrer" class="text-sm underline decoration-1 underline-offset-2 hover:text-river-deep transition-colors w-fit" style="color: var(--ink);">
+              {social.TEXT}
+            </a>
+          </>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  </div>
+</PageLayout>
+
+<style>
+  .about :global(b) {
+    color: var(--ink);
+  }
+</style>
