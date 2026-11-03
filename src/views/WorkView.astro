@@ -2,7 +2,6 @@
 import { getEntry } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import CvTimeline from "@components/CvTimeline"
-import { WORK } from "@consts"
 import type { Lang } from "@i18n/config"
 import { getLocalized } from "@i18n/content"
 import { ui } from "@i18n/ui"
@@ -34,7 +33,7 @@ if (!classicEntry) throw new Error(`[i18n] work: falta ${lang}/classic.md`)
 const { Content: ClassicContent } = await classicEntry.render()
 ---
 
-<PageLayout title={WORK.TITLE} description={t.meta.workDescription} lang={lang}>
+<PageLayout title={t.nav.cv} description={t.meta.workDescription} lang={lang}>
   <div class="mx-auto max-w-screen-md px-5 pt-28 pb-20">
 
     <!-- rótulo tipo plano de ingeniería: la personalidad de esta sección -->

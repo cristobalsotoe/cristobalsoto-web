@@ -10,6 +10,11 @@ export default defineConfig({
   redirects: {
     '/hobbies': '/not-cv',
   },
-  integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
+  integrations: [
+    mdx(),
+    sitemap({ i18n: { defaultLocale: "en", locales: { en: "en", es: "es" } } }),
+    solidJs(),
+    tailwind({ applyBaseStyles: false }),
+  ],
 })
 

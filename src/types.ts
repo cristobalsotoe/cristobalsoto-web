@@ -5,7 +5,8 @@ export type Page = {
   DESCRIPTION: string
 }
 
-export interface Site extends Page {
+export type Site = {
+  TITLE: string
   AUTHOR: string
 }
 

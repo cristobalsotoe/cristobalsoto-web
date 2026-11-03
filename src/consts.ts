@@ -3,38 +3,13 @@ import type { Site, Page, Links, Socials } from "@types"
 // Global
 export const SITE: Site = {
   TITLE: "Cristóbal Soto-Escobar",
-  DESCRIPTION: "Hidrólogo trabajando en precipitaciones extremas y curvas IDF en Chile. Estudiante de doctorado en UC Irvine.",
   AUTHOR: "Cristóbal Soto-Escobar",
-}
-
-// Work Page
-export const WORK: Page = {
-  TITLE: "CV",
-  DESCRIPTION: "Academic and professional history.",
-}
-
-// Not CV Page
-export const NOT_CV: Page = {
-  TITLE: "Not CV",
-  DESCRIPTION: "Café, fotografía y los lugares donde he estado.",
-}
-
-// Blog Page
-export const BLOG: Page = {
-  TITLE: "Blog",
-  DESCRIPTION: "Writing on topics I am passionate about.",
 }
 
 // Projects Page 
 export const PROJECTS: Page = {
   TITLE: "Projects",
   DESCRIPTION: "Recent projects I have worked on.",
-}
-
-// Search Page
-export const SEARCH: Page = {
-  TITLE: "Search",
-  DESCRIPTION: "Search all posts and projects by keyword.",
 }
 
 // Links

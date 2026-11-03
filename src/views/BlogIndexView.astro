@@ -1,6 +1,5 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro"
-import { BLOG } from "@consts"
 import type { Lang } from "@i18n/config"
 import { getLocalized } from "@i18n/content"
 import { formatDate, longDate, readingTime } from "@i18n/format"
@@ -21,7 +20,7 @@ const posts = (await getLocalized("blog", lang))
 const today = longDate(new Date(), lang)
 ---
 
-<PageLayout title={BLOG.TITLE} description={t.meta.blogDescription} lang={lang}>
+<PageLayout title={t.nav.blog} description={t.meta.blogDescription} lang={lang}>
   <div class="ident-blog flex-1 -mb-px">
     <div class="mx-auto max-w-screen-lg px-5 pt-28 pb-20">
 
