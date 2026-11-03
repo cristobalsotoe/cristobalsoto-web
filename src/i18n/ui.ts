@@ -110,7 +110,7 @@ const en: UIStrings = {
   },
   home: {
     role: "Hydrologist · Irvine, California",
-    tagline: "I study extreme precipitation and intensity-duration-frequency curves in Chile.",
+    tagline: "I study extreme precipitation and intensity-duration-frequency curves.",
     dioramaNote: "This diorama is the trip I already made: drive the car from the houses of Temuco to the Irvine sign.",
     ctaCv: "View CV",
     ctaBlog: "Read the blog",
@@ -201,7 +201,7 @@ const es: UIStrings = {
   },
   home: {
     role: "Hidrólogo · Irvine, California",
-    tagline: "Investigo precipitaciones extremas y curvas intensidad-duración-frecuencia en Chile.",
+    tagline: "Investigo precipitaciones extremas y curvas intensidad-duración-frecuencia.",
     dioramaNote: "Este diorama es el viaje que ya hice: maneja el auto desde las casas de Temuco hasta el letrero de Irvine.",
     ctaCv: "Ver CV",
     ctaBlog: "Leer el blog",
