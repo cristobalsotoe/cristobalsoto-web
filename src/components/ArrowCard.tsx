@@ -1,15 +1,19 @@
 import { truncateText } from "@lib/utils"
+import type { Lang } from "@i18n/config"
 import { formatDate } from "@i18n/format"
+import { postPath } from "@i18n/slugs"
 import type { CollectionEntry } from "astro:content"
 
 type Props = {
   entry: CollectionEntry<"blog"> | CollectionEntry<"projects">
   pill?: boolean
+  lang?: Lang
 }
 
-export default function ArrowCard({ entry, pill }: Props) {
+export default function ArrowCard({ entry, pill, lang = "en" }: Props) {
+  const href = entry.collection === "blog" ? postPath(entry.slug) : `/${entry.collection}/${entry.slug}`
   return (
-    <a href={`/${entry.collection}/${entry.slug}`} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out">
+    <a href={href} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out">
       <div class="w-full group-hover:text-black group-hover:dark:text-white blend">
         <div class="flex flex-wrap items-center gap-2">
           {pill &&
@@ -18,7 +22,7 @@ export default function ArrowCard({ entry, pill }: Props) {
             </div>
           }
           <div class="text-sm uppercase">
-            {formatDate(entry.data.date)}
+            {formatDate(entry.data.date, lang)}
           </div>
         </div>
         <div class="font-semibold mt-3 text-black dark:text-white line-clamp-2">

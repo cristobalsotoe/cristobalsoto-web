@@ -3,17 +3,21 @@ import { createEffect, createSignal } from "solid-js"
 import Fuse from "fuse.js"
 import ArrowCard from "@components/ArrowCard"
 import SearchBar from "@components/SearchBar"
+import type { Lang } from "@i18n/config"
+import { ui } from "@i18n/ui"
 
 type Props = {
   data: CollectionEntry<"blog">[]
+  lang: Lang
 }
 
-export default function Search({ data }: Props) {
+export default function Search({ data, lang }: Props) {
+  const t = ui[lang].search
   const [query, setQuery] = createSignal("")
   const [results, setResults] = createSignal<CollectionEntry<"blog">[]>([])
 
   const fuse = new Fuse(data, {
-    keys: ["slug", "data.title", "data.summary", "data.tags"],
+    keys: ["data.title", "data.summary", "data.tags"],
     includeMatches: true,
     minMatchCharLength: 2,
     threshold: 0.4,
@@ -34,17 +38,17 @@ export default function Search({ data }: Props) {
 
   return (
     <div class="flex flex-col">
-      <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText="What are you looking for?" />
+      <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText={t.placeholder} />
 
       {(query().length >= 2 && results().length >= 1) && (
         <div class="mt-12">
           <div class="text-sm uppercase mb-2">
-            Found {results().length} results for {`'${query()}'`}
+            {t.results.replace("{n}", String(results().length)).replace("{q}", query())}
           </div>
           <ul class="flex flex-col gap-3">
             {results().map(result => (
               <li>
-                <ArrowCard entry={result} pill={true} />
+                <ArrowCard entry={result} lang={lang} />
               </li>
             ))}
           </ul>
