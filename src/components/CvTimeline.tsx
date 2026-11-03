@@ -1,4 +1,7 @@
 import { createSignal, onMount, onCleanup, For, Show } from "solid-js"
+import type { Lang } from "@i18n/config"
+import { duration, monthYear } from "@i18n/format"
+import { ui } from "@i18n/ui"
 
 type Milestone = {
   slug: string
@@ -14,28 +17,18 @@ type Milestone = {
 
 type Props = {
   milestones: Milestone[]
+  lang: Lang
 }
 
-const CAT = {
-  education: { label: "Educación", color: "var(--gold)" },
-  experience: { label: "Experiencia", color: "var(--river)" },
-} as const
-
-const monthYear = (iso: string) => {
-  const d = new Date(iso)
-  return d.toLocaleDateString("es-CL", { month: "short", year: "numeric" }).replace(".", "")
-}
-
-const duration = (startIso: string, endIso: string) => {
-  const start = new Date(startIso)
-  const end = endIso === "Present" ? new Date() : new Date(endIso)
-  const months = Math.max(1, Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 30.4)))
-  if (months < 12) return `${months} ${months === 1 ? "mes" : "meses"}`
-  const years = Math.round(months / 12)
-  return `${years} ${years === 1 ? "año" : "años"}`
-}
+const categories = (lang: Lang) =>
+  ({
+    education: { label: ui[lang].work.education, color: "var(--gold)" },
+    experience: { label: ui[lang].work.experience, color: "var(--river)" },
+  }) as const
 
 export default function CvTimeline(props: Props) {
+  const t = ui[props.lang].work
+  const CAT = categories(props.lang)
   const [shown, setShown] = createSignal<Set<string>>(new Set())
   const [active, setActive] = createSignal<string | null>(null)
   const [progress, setProgress] = createSignal(0)
@@ -177,14 +170,14 @@ export default function CvTimeline(props: Props) {
                     <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
                       <span class="label" style={{ color: cat.color }}>{cat.label}</span>
                       <span class="font-mono text-xs uppercase tracking-wide" style="color: var(--ink-faint);">
-                        {monthYear(m.dateStart)} — {m.dateEnd === "Present" ? "presente" : monthYear(m.dateEnd)}
+                        {monthYear(m.dateStart, props.lang)} — {m.dateEnd === "Present" ? t.present : monthYear(m.dateEnd, props.lang)}
                       </span>
                       <span class="font-mono text-xs px-2 py-0.5 rounded-full" style="background: var(--paper-raised); color: var(--ink-soft);">
-                        {duration(m.dateStart, m.dateEnd)}
+                        {duration(m.dateStart, m.dateEnd, props.lang)}
                       </span>
                       <Show when={m.dateEnd === "Present"}>
                         <span class="font-mono text-[0.62rem] uppercase tracking-wider px-2 py-0.5 rounded-full" style="background: var(--river); color: var(--paper);">
-                          actual
+                          {t.current}
                         </span>
                       </Show>
                     </div>
