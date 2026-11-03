@@ -1,4 +1,5 @@
-import { formatDate, truncateText } from "@lib/utils"
+import { truncateText } from "@lib/utils"
+import { formatDate } from "@i18n/format"
 import type { CollectionEntry } from "astro:content"
 
 type Props = {

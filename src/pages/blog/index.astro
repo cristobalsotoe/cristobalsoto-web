@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import { BLOG } from "@consts"
-import { formatDate, readingTime } from "@lib/utils"
+import { formatDate, readingTime } from "@i18n/format"
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)

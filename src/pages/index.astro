@@ -3,7 +3,7 @@ import { getCollection } from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import Landscape3D from "@components/Landscape3D"
 import { SITE, SOCIALS } from "@consts"
-import { formatDate } from "@lib/utils"
+import { formatDate } from "@i18n/format"
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
